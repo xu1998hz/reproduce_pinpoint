@@ -1,0 +1,6 @@
+# add out and save dir
+out/
+save/
+slurm_out/
+# pycache
+__pycache__/
