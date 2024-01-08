@@ -1,5 +1,5 @@
 # add out and save dir
-out/
+out/data
 save/
 slurm_out/
 # pycache

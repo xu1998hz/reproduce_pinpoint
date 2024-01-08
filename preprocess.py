@@ -34,7 +34,7 @@ def parse_text(text, task, language):
 
 class TSVDataSet(Dataset):
 
-    def __init__(self, tsv_file, task, language=None, nrows=None):
+    def __init__(self, tsv_file, task, language=None, model_base='llama', nrows=None):
         if tsv_file:
             if nrows: # for testing
                 self.data = pd.read_csv(tsv_file, sep='\t', nrows=nrows)
@@ -42,44 +42,62 @@ class TSVDataSet(Dataset):
                self.data = pd.read_csv(tsv_file, sep='\t')
         self.task = task
         self.language = language
-        if self.task == 'mt':
-            self.system_prompt = "<s>[INST] <<SYS>>\n" + \
-                "Perform the following translation task, providing only the translated text without any additional explanation or comments." + \
-                "\n<</SYS>>\n\n"
-            if self.language == 'zh-en':
-                self.example_prompt = "Translating Chinese into English. Chinese:\n以免再次发生这样的事情. \nEnglish: [/INST] " + \
-                    "So that such a thing won't happen again. </s>" + \
-                    "<s>[INST] Translating Chinese into English. Chinese:\n众所周知，在事故发生后救护车来的过程中其实是还有一段时间的，而正是这段时间才是最关键的。\nEnglish: [/INST] " + \
-                    "As everyone knows, there is a period before the coming of the ambulance after the accident happens, which is most critical. </s>" 
-                self.start_prompt = "<s>[INST] Translating Chinese into English. Chinese:\n"
-                self.end_prompt = " \nEnglish: [/INST]"
-            elif self.language == 'en-de':
-                self.example_prompt = "Translating English into German. English:\nI sincerely hope you get to find a resolution \nGerman: [/INST] " + \
-                    "Ich hoffe wirklich, dass Sie eine Lösung finden werden </s>" + \
-                    "<s>[INST] Translating English into German. English:\nIf you require your order urgently, please choose the express courier postage option (if this is not shown for your country, please contact us for a quote). \nGerman: [/INST] " + \
-                    "Wenn Sie Ihre Bestellung dringend brauchen, wählen Sie bitte die Option für Versand mit Expresskurier (wenn sie für Ihr Land nicht angezeigt wird, wenden Sie sich für einen Kostenvoranschlag an uns). </s>"
-                self.start_prompt = "<s>[INST] Translating English into German. English:\n"
-                self.end_prompt = " \nGerman: [/INST]"
+        self.model_base = model_base
+        if self.model_base == 'llama':
+            if self.task == 'mt':
+                self.system_prompt = "<s>[INST] <<SYS>>\n" + \
+                    "Perform the following translation task, providing only the translated text without any additional explanation or comments." + \
+                    "\n<</SYS>>\n\n"
+                if self.language == 'zh-en':
+                    self.example_prompt = "Translating Chinese into English. Chinese:\n以免再次发生这样的事情. \nEnglish: [/INST] " + \
+                        "So that such a thing won't happen again. </s>" + \
+                        "<s>[INST] Translating Chinese into English. Chinese:\n众所周知，在事故发生后救护车来的过程中其实是还有一段时间的，而正是这段时间才是最关键的。\nEnglish: [/INST] " + \
+                        "As everyone knows, there is a period before the coming of the ambulance after the accident happens, which is most critical. </s>" 
+                    self.start_prompt = "<s>[INST] Translating Chinese into English. Chinese:\n"
+                    self.end_prompt = " \nEnglish: [/INST]"
+                elif self.language == 'en-de':
+                    self.example_prompt = "Translating English into German. English:\nI sincerely hope you get to find a resolution \nGerman: [/INST] " + \
+                        "Ich hoffe wirklich, dass Sie eine Lösung finden werden </s>" + \
+                        "<s>[INST] Translating English into German. English:\nIf you require your order urgently, please choose the express courier postage option (if this is not shown for your country, please contact us for a quote). \nGerman: [/INST] " + \
+                        "Wenn Sie Ihre Bestellung dringend brauchen, wählen Sie bitte die Option für Versand mit Expresskurier (wenn sie für Ihr Land nicht angezeigt wird, wenden Sie sich für einen Kostenvoranschlag an uns). </s>"
+                    self.start_prompt = "<s>[INST] Translating English into German. English:\n"
+                    self.end_prompt = " \nGerman: [/INST]"
+                else:
+                    raise NotImplementedError
+            elif self.task == 'qa':
+                # TODO: TBD
+                self.system_prompt = "<s>[INST] <<SYS>>\n" + \
+                    "Write a comprehensive, paragraph-long answer to the following question. Ensure that your answer integrates the given factoid context, is well-structured, and provides a thorough explanation or analysis as required by the question. Your response should be clear, concise, and focused, forming a cohesive paragraph." + \
+                    "\n<</SYS>>\n\n"
+                self.start_prompt = "Question: "
+                self.end_prompt = " \nAnswer: [/INST]"
+                self.example_prompt = ''
+            elif self.task == 'summ':
+                self.system_prompt = "<s>[INST] <<SYS>>\n" + \
+                    "Read the following passage. Then, based on the passage, summarize the specific aspect or section as indicated in the question. Your summary should be concise, accurate, and focused on the relevant part of the passage, capturing the key points and main ideas related to the query" + \
+                    "\n<</SYS>>\n\n"
+                # self.start_prompt = "Passage: "
+                self.start_prompt = ''
+                self.end_prompt = " \nAnswer: [/INST]"
+                self.example_prompt = ''
             else:
                 raise NotImplementedError
-        elif self.task == 'qa':
-            # TODO: TBD
-            self.system_prompt = "<s>[INST] <<SYS>>\n" + \
-                "Write a comprehensive, paragraph-long answer to the following question. Ensure that your answer integrates the given factoid context, is well-structured, and provides a thorough explanation or analysis as required by the question. Your response should be clear, concise, and focused, forming a cohesive paragraph." + \
-                "\n<</SYS>>\n\n"
-            self.start_prompt = "Question: "
-            self.end_prompt = " \nAnswer: [/INST]"
-            self.example_prompt = ''
-        elif self.task == 'summ':
-            self.system_prompt = "<s>[INST] <<SYS>>\n" + \
-                "Read the following passage. Then, based on the passage, summarize the specific aspect or section as indicated in the question. Your summary should be concise, accurate, and focused on the relevant part of the passage, capturing the key points and main ideas related to the query" + \
-                "\n<</SYS>>\n\n"
-            # self.start_prompt = "Passage: "
-            self.start_prompt = ''
-            self.end_prompt = " \nAnswer: [/INST]"
-            self.example_prompt = ''
-        else:
-            raise NotImplementedError
+        elif self.model_base == 'mistral':
+            if self.task == 'mt':
+                if self.language == 'zh-en':
+                    self.system_prompt = "<s>[INST] Translate the following Chinese into English. Give only one clean English translation without any Chinese explanation. Chinese:\n" 
+                    self.example_prompt, self.start_prompt = '', ''
+                    self.end_prompt = " \nEnglish: [/INST]"
+                elif self.language == 'en-de':
+                    self.system_prompt = "<s>[INST] Translate the following English into German. Give only one clean German translation without any English explanation. English:\n" 
+                    self.example_prompt, self.start_prompt = '', ''
+                    self.end_prompt = " \nGerman: [/INST]"
+                else:
+                    raise NotImplementedError
+
+            else:
+                raise NotImplementedError
+
         self.p_lens = [len(self.system_prompt) + len(self.example_prompt) + len(self.start_prompt), len(self.end_prompt)]
 
     def __len__(self):

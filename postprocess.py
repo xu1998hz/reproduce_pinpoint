@@ -10,9 +10,27 @@ def is_english(text):
     try:
         # A simple check for English could be based on ASCII characters
         text.encode('ascii')
-        return True
+        return 1
     except UnicodeEncodeError:
-        return False
+        return 0
+    
+def mistral_parse(text, language):
+    if text.find('(Literally:') != -1:
+        text = text[:text.find('(Literally:')]
+    # Split the text into subtexts using '\n' and find the part with the most (none)English characters
+    subtexts = text.split('\n')
+
+    best_match = subtexts[0]
+    if language == 'zh-en':
+        for s in subtexts:
+            if sum([is_english(i) for i in s]) > sum([is_english(i) for i in best_match]):
+                best_match = s
+
+    elif language == 'en-de':
+        for s in subtexts:
+            if len(s) - sum([is_english(i) for i in s]) > len(best_match) - sum([is_english(i) for i in best_match]):
+                best_match = s
+    return best_match
 
 def parse_text(text):
     # Split the text into subtexts using '\n'
@@ -42,6 +60,7 @@ if __name__ == '__main__':
     argparser.add_argument("--data_file", type=str, default="out/zh-en_wmt_test_wmt22_out.pkl")
     argparser.add_argument("--task", type=str, help="mt, qa or summ")
     argparser.add_argument("--language", type=str, default="zh-en", help="zh-en or en-de")
+    argparser.add_argument("--model_base", type=str, default="llama", help="llama or mistral")
     argparser.add_argument("--out_path", type=str, default="out/zh-en_wmt_test_wmt22_out_clean.pkl")
     argparser.add_argument("--debug", type=str, default="False")
     args = argparser.parse_args()
@@ -53,16 +72,23 @@ if __name__ == '__main__':
     if args.debug:
         f = open('out/debug_post.txt', 'w')
     for idx, i in enumerate(data):
-        a, b = TSVDataSet(None, args.task, args.language).p_lens
+        a, b = TSVDataSet(None, args.task, args.language, args.model_base).p_lens
+        # print(a, b)
         if args.task == 'mt':
             src = i['src'][a: -b]
             ref = i['ref']
             mt = i['mt']
-            mt = mt[len(i['src']) - 14:] # 14 = len(<s></s>) * 2
+            if args.model_base == 'llama':
+                mt = mt[len(i['src']) - 14:] # 14 = len(<s></s>) * 2
+            else:
+                mt = mt[len(i['src']) - 2:] 
+
             if args.debug:
                 f.write(str(idx).ljust(60, '=') + '\n')
                 f.write(mt + '\n')
             mt = parse_text(mt)
+            if args.model_base == 'mistral':
+                mt = mistral_parse(mt, args.language)
             parsed.append({'src': src, 'ref': ref, 'mt': mt})
         elif args.task == 'qa':
             # do nothing for now

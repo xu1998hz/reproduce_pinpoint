@@ -17,13 +17,14 @@ nvidia-smi
 
 cd /ocean/projects/cis230075p/gzhu/reproduce_pinpoint
 
-while getopts i:b:m:p:o:t:d: flag
+while getopts i:b:m:p:o:t:d:s: flag
 do
     case "${flag}" in
         i) data_file=${OPTARG};;
         t) task=${OPTARG};;
         b) batch_size=${OPTARG};;
         m) model_base=${OPTARG};;
+        s) model_size=${OPTARG};;
         p) precision=${OPTARG};;
         o) out_dir=${OPTARG};;
         d) debug=${OPTARG};;
@@ -41,7 +42,7 @@ echo "Data File: $data_file"
 echo "Task: $task"
 echo "Language: $lang"
 echo "Batch Size: $batch_size"
-echo "Model base: Llama-2-${model_base}b-chat"
+echo "Model: ${model_base}-${model_size}b"
 echo "Precision: $precision"
 echo "Output Directory: $out_dir"
 echo "Comet Model: $comet_model"
@@ -51,13 +52,13 @@ echo "Debug Mode: $debug"
 # set -x
 
 #run scripts
-echo "Running LLaMA inference!"
-python3 llama_inference.py --model "$model_base" --data_file "$data_file" --out_path "$out_data_path" --precision "$precision" \
-     --batch_size "$batch_size" --lang "$lang" --task "$task" --debug "$debug"
+echo "Running ${model_base}-${model_size}b inference!"
+python3 inference.py --model_base "$model_base" --model_size "$model_size" --data_file "$data_file" --out_path "$out_data_path" --precision "$precision" \
+     --batch_size "$batch_size" --language "$lang" --task "$task" --debug "$debug"
 echo "Saved inference output to $out_data_path"
 out_clean_path="$out_dir/data/${fname}_out_clean.pkl"
 echo "Cleaning up!"
-python3 postprocess.py --data_file "$out_data_path" --out_path "$out_clean_path" --lang "$lang" --task "$task" --debug "$debug"
+python3 postprocess.py --data_file "$out_data_path" --out_path "$out_clean_path" --model_base "$model_base" --language "$lang" --task "$task" --debug "$debug"
 echo "Saved cleaned output to $out_clean_path"
 
 if [ "$task" = "mt" ]; then
