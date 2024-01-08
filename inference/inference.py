@@ -68,8 +68,8 @@ if __name__ == '__main__':
     # print('saving to', out_path)
     nrows = None
     if args.debug:
-        nrows = 20
-    # nrows = 50
+        nrows = 50
+    # nrows = 50 # for debug
     dataset = TSVDataSet(args.data_file, args.task, args.language, args.model_base, nrows)
     print(dataset.data)
     dataloader = DataLoader(dataset, args.batch_size, shuffle=False)

@@ -53,29 +53,29 @@ echo "Debug Mode: $debug"
 
 #run scripts
 echo "Running ${model_base}-${model_size}b inference!"
-python3 inference.py --model_base "$model_base" --model_size "$model_size" --data_file "$data_file" --out_path "$out_data_path" --precision "$precision" \
+python3 inference/inference.py --model_base "$model_base" --model_size "$model_size" --data_file "$data_file" --out_path "$out_data_path" --precision "$precision" \
      --batch_size "$batch_size" --language "$lang" --task "$task" --debug "$debug"
 echo "Saved inference output to $out_data_path"
 out_clean_path="$out_dir/data/${fname}_out_clean.pkl"
 echo "Cleaning up!"
-python3 postprocess.py --data_file "$out_data_path" --out_path "$out_clean_path" --model_base "$model_base" --language "$lang" --task "$task" --debug "$debug"
+python3 inference/postprocess.py --data_file "$out_data_path" --out_path "$out_clean_path" --model_base "$model_base" --language "$lang" --task "$task" --debug "$debug"
 echo "Saved cleaned output to $out_clean_path"
 
 if [ "$task" = "mt" ]; then
     comet_out="$out_dir/comet_${fname}.txt"
     conda activate comet
     echo "Running COMET eval for ${task}!"
-    python3 comet_eval.py --data "$out_clean_path" --out_path "$comet_out" --model "$comet_model" 
+    python3 inference/comet_eval.py --data "$out_clean_path" --out_path "$comet_out" --model "$comet_model" 
     echo "Saved COMET eval to $comet_out"
 elif [ "$task" = "qa" ]; then
     rouge_out="$out_dir/rouge_${fname}.txt"
     echo "Running ROUGE eval for ${task}!"
-    python3 rouge_eval.py --data "$out_clean_path" --out_path "$rouge_out" --task "$task"
+    python3 inference/rouge_eval.py --data "$out_clean_path" --out_path "$rouge_out" --task "$task"
     echo "Saved ROUGE eval to $rouge_out"
 elif [ "$task" = "summ" ]; then
     rouge_out="$out_dir/rouge_${fname}.txt"
     echo "Running ROUGE eval for ${task}!"
-    python3 rouge_eval.py --data "$out_clean_path" --out_path "$rouge_out" --task "$task"
+    python3 inference/rouge_eval.py --data "$out_clean_path" --out_path "$rouge_out" --task "$task"
     echo "Saved ROUGE eval to $rouge_out"
 else
     echo "Invalid task!"
