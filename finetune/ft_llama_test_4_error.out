@@ -1,0 +1,99 @@
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:14<00:14, 14.47s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:14<00:14, 14.29s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:12<00:12, 12.84s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:15<00:15, 15.39s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:18<00:00,  8.21s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:18<00:00,  9.15s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  8.87s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  9.68s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:17<00:00,  8.29s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:17<00:00,  8.97s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  8.73s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  9.73s/it]
+Using /home/guangleizhu/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
+Using /home/guangleizhu/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
+Detected CUDA files, patching ldflags
+Emitting ninja build file /home/guangleizhu/.cache/torch_extensions/py311_cu121/cpu_adam/build.ninja...
+Building extension module cpu_adam...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+Using /home/guangleizhu/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
+Using /home/guangleizhu/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
+Loading extension module cpu_adam...
+Loading extension module cpu_adam...
+Loading extension module cpu_adam...
+Loading extension module cpu_adam...
+wandb: Currently logged in as: guanglei-zhu (ian-team). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.0
+wandb: Run data is saved locally in /home/guangleizhu/reproduce_pinpoint/finetune/wandb/run-20240113_081849-aczmiu39
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run wandb
+wandb: ⭐️ View project at https://wandb.ai/ian-team/huggingface
+wandb: 🚀 View run at https://wandb.ai/ian-team/huggingface/runs/aczmiu39
+  0%|          | 0/107 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/home/guangleizhu/reproduce_pinpoint/finetune/finetune_llama.py", line 309, in <module>
+    train_result = trainer.train()
+                   ^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 1555, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 1860, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 2725, in training_step
+    loss = self.compute_loss(model, inputs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 2748, in compute_loss
+    outputs = model(**inputs)
+              ^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 1833, in forward
+    loss = self.module(*inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1568, in _call_impl
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 1034, in forward
+    outputs = self.model(
+              ^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1568, in _call_impl
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 922, in forward
+    layer_outputs = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1568, in _call_impl
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 686, in forward
+    hidden_states = self.mlp(hidden_states)
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1568, in _call_impl
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 258, in forward
+    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+                                                                ^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1568, in _call_impl
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 12.00 MiB. GPU 2 has a total capacty of 47.54 GiB of which 4.88 MiB is free. Process 2347441 has 14.66 GiB memory in use. Process 3257603 has 14.66 GiB memory in use. Process 1155825 has 262.00 MiB memory in use. Process 1169738 has 262.00 MiB memory in use. Process 1187407 has 262.00 MiB memory in use. Including non-PyTorch memory, this process has 17.13 GiB memory in use. Process 1253405 has 262.00 MiB memory in use. Of the allocated memory 15.34 GiB is allocated by PyTorch, and 194.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

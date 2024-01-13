@@ -1,14 +1,14 @@
 #!/bin/bash
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=32GB
+#SBATCH --cpus-per-task=20
+#SBATCH --mem=512GB
 #SBATCH --gpus=4
 #SBATCH --time=4:00:00
 #SBATCH --account=guangleizhu
-#SBATCH --partition=taurus
-#SBATCH --output=/home/guangleizhu/ft_llama_test_4.out
-#SBATCH --error=/home/guangleizhu/ft_llama_test_4_error.out
+#SBATCH --partition=aries
+#SBATCH --output=/home/guangleizhu/reproduce_pinpoint/finetune/ft_llama_test_4.out
+#SBATCH --error=/home/guangleizhu/reproduce_pinpoint/finetune/ft_llama_test_4_error.out
 
 source ~/.bashrc
 # module purge
@@ -25,6 +25,6 @@ nvidia-smi
 # - username should be replaced by your username
 # - path-to-directory should be replaced by the path to your directory where the executable is
 
-cd /home/guangleizhu
+cd /home/guangleizhu/reproduce_pinpoint/finetune
 
 deepspeed --num_gpus 4 finetune_llama.py

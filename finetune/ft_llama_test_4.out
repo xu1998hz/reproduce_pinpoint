@@ -1,0 +1,196 @@
+Sat Jan 13 08:14:32 2024       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 525.125.06   Driver Version: 525.125.06   CUDA Version: 12.0     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA RTX A6000    Off  | 00000000:01:00.0 Off |                  Off |
+| 30%   55C    P8    35W / 300W |   7015MiB / 49140MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+|   1  NVIDIA RTX A6000    Off  | 00000000:25:00.0 Off |                  Off |
+| 30%   54C    P2    89W / 300W |   4563MiB / 49140MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+|   2  NVIDIA RTX A6000    Off  | 00000000:41:00.0 Off |                  Off |
+| 30%   55C    P2    79W / 300W |  31093MiB / 49140MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+|   3  NVIDIA RTX A6000    Off  | 00000000:61:00.0 Off |                  Off |
+| 30%   44C    P8    21W / 300W |  20033MiB / 49140MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+|   4  NVIDIA RTX A6000    Off  | 00000000:81:00.0 Off |                  Off |
+| 30%   35C    P8    28W / 300W |   4105MiB / 49140MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+|   5  NVIDIA RTX A6000    Off  | 00000000:A1:00.0 Off |                  Off |
+| 30%   32C    P8    32W / 300W |   4095MiB / 49140MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+|   6  NVIDIA RTX A6000    Off  | 00000000:C1:00.0 Off |                  Off |
+| 30%   51C    P2    83W / 300W |  16649MiB / 49140MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+|   7  NVIDIA RTX A6000    Off  | 00000000:E1:00.0 Off |                  Off |
+| 30%   32C    P8    30W / 300W |   4111MiB / 49140MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0   N/A  N/A   1140073      C   python                            262MiB |
+|    0   N/A  N/A   1148986      C   python                            262MiB |
+|    0   N/A  N/A   1155421      C   python                            262MiB |
+|    0   N/A  N/A   1217965      C   python                            262MiB |
+|    1   N/A  N/A   1178934      C   python                            262MiB |
+|    1   N/A  N/A   1185760      C   python                            262MiB |
+|    1   N/A  N/A   1219836      C   python                            262MiB |
+|    2   N/A  N/A   1151013      C   python                            262MiB |
+|    2   N/A  N/A   1155825      C   python                            262MiB |
+|    2   N/A  N/A   1169738      C   python                            262MiB |
+|    2   N/A  N/A   1187407      C   python                            262MiB |
+|    3   N/A  N/A   1160227      C   python                            262MiB |
+|    3   N/A  N/A   1160613      C   python                            262MiB |
+|    3   N/A  N/A   1164485      C   python                            262MiB |
+|    3   N/A  N/A   1167817      C   python                            262MiB |
+|    3   N/A  N/A   1191266      C   python                            262MiB |
+|    4   N/A  N/A   1135448      C   python                            262MiB |
+|    4   N/A  N/A   1156924      C   python                            262MiB |
+|    5   N/A  N/A   1140841      C   python                            262MiB |
+|    5   N/A  N/A   1212276      C   python                            262MiB |
+|    6   N/A  N/A   1217587      C   python                            262MiB |
+|    7   N/A  N/A   1136807      C   python                            262MiB |
+|    7   N/A  N/A   1203595      C   python                            262MiB |
++-----------------------------------------------------------------------------+
+[2024-01-13 08:14:36,467] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-01-13 08:14:39,299] [WARNING] [runner.py:202:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Detected CUDA_VISIBLE_DEVICES=0,1,2,3 but ignoring it because one or several of --include/--exclude/--num_gpus/--num_nodes cl args were used. If you want to use CUDA_VISIBLE_DEVICES don't pass any of these arguments to deepspeed.
+[2024-01-13 08:14:39,301] [INFO] [runner.py:571:main] cmd = /home/guangleizhu/miniconda3/envs/torch2.1/bin/python -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMCwgMSwgMiwgM119 --master_addr=127.0.0.1 --master_port=29500 --enable_each_rank_log=None finetune_llama.py
+[2024-01-13 08:14:41,721] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-01-13 08:14:44,765] [INFO] [launch.py:145:main] WORLD INFO DICT: {'localhost': [0, 1, 2, 3]}
+[2024-01-13 08:14:44,765] [INFO] [launch.py:151:main] nnodes=1, num_local_procs=4, node_rank=0
+[2024-01-13 08:14:44,765] [INFO] [launch.py:162:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0, 1, 2, 3]})
+[2024-01-13 08:14:44,765] [INFO] [launch.py:163:main] dist_world_size=4
+[2024-01-13 08:14:44,765] [INFO] [launch.py:165:main] Setting CUDA_VISIBLE_DEVICES=0,1,2,3
+[2024-01-13 08:14:50,988] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-01-13 08:14:51,113] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Dataset({
+    features: ['output', 'input'],
+    num_rows: 6847
+}) Dataset({
+    features: ['output', 'input'],
+    num_rows: 5
+})
+Start loading in tokenizers
+[2024-01-13 08:14:51,672] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Dataset({
+    features: ['output', 'input'],
+    num_rows: 6847
+}) Dataset({
+    features: ['output', 'input'],
+    num_rows: 5
+})
+Start loading in tokenizers
+Start loading in model meta-llama/Llama-2-7b-chat-hf
+Start loading in model meta-llama/Llama-2-7b-chat-hf
+Dataset({
+    features: ['output', 'input'],
+    num_rows: 6847
+}) Dataset({
+    features: ['output', 'input'],
+    num_rows: 5
+})
+Start loading in tokenizers
+[2024-01-13 08:14:52,560] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Start loading in model meta-llama/Llama-2-7b-chat-hf
+Dataset({
+    features: ['output', 'input'],
+    num_rows: 6847
+}) Dataset({
+    features: ['output', 'input'],
+    num_rows: 5
+})
+Start loading in tokenizers
+Start loading in model meta-llama/Llama-2-7b-chat-hf
+Estimated memory needed for params, optim states and gradients for a:
+HW: Setup with 1 node, 4 GPUs per node.
+SW: Model with 6738M total params, 131M largest layer params.
+  per CPU  |  per GPU |   Options
+  169.44GB |   0.49GB | offload_param=OffloadDeviceEnum.cpu, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=1
+  169.44GB |   0.49GB | offload_param=OffloadDeviceEnum.cpu, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=0
+  150.62GB |   3.63GB | offload_param=none, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=1
+  150.62GB |   3.63GB | offload_param=none, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=0
+    2.93GB |  28.73GB | offload_param=none, offload_optimizer=none, zero_init=1
+  150.62GB |  28.73GB | offload_param=none, offload_optimizer=none, zero_init=0
+Estimated memory needed for params, optim states and gradients for a:
+HW: Setup with 1 node, 4 GPUs per node.
+SW: Model with 6738M total params, 131M largest layer params.
+  per CPU  |  per GPU |   Options
+  169.44GB |   0.49GB | offload_param=OffloadDeviceEnum.cpu, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=1
+  169.44GB |   0.49GB | offload_param=OffloadDeviceEnum.cpu, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=0
+  150.62GB |   3.63GB | offload_param=none, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=1
+  150.62GB |   3.63GB | offload_param=none, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=0
+    2.93GB |  28.73GB | offload_param=none, offload_optimizer=none, zero_init=1
+  150.62GB |  28.73GB | offload_param=none, offload_optimizer=none, zero_init=0
+Estimated memory needed for params, optim states and gradients for a:
+HW: Setup with 1 node, 4 GPUs per node.
+SW: Model with 6738M total params, 131M largest layer params.
+  per CPU  |  per GPU |   Options
+  169.44GB |   0.49GB | offload_param=OffloadDeviceEnum.cpu, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=1
+  169.44GB |   0.49GB | offload_param=OffloadDeviceEnum.cpu, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=0
+  150.62GB |   3.63GB | offload_param=none, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=1
+  150.62GB |   3.63GB | offload_param=none, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=0
+    2.93GB |  28.73GB | offload_param=none, offload_optimizer=none, zero_init=1
+  150.62GB |  28.73GB | offload_param=none, offload_optimizer=none, zero_init=0
+Estimated memory needed for params, optim states and gradients for a:
+HW: Setup with 1 node, 4 GPUs per node.
+SW: Model with 6738M total params, 131M largest layer params.
+  per CPU  |  per GPU |   Options
+  169.44GB |   0.49GB | offload_param=OffloadDeviceEnum.cpu, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=1
+  169.44GB |   0.49GB | offload_param=OffloadDeviceEnum.cpu, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=0
+  150.62GB |   3.63GB | offload_param=none, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=1
+  150.62GB |   3.63GB | offload_param=none, offload_optimizer=OffloadDeviceEnum.cpu, zero_init=0
+    2.93GB |  28.73GB | offload_param=none, offload_optimizer=none, zero_init=1
+  150.62GB |  28.73GB | offload_param=none, offload_optimizer=none, zero_init=0
+Loaded in model and tokenizers
+Start making data module
+Loaded in model and tokenizers
+Start making data module
+Loaded in model and tokenizers
+Start making data module
+Loaded in model and tokenizers
+Start making data module
+[2024-01-13 08:16:33,877] [INFO] [comm.py:637:init_distributed] cdb=None
+[2024-01-13 08:16:34,416] [INFO] [comm.py:637:init_distributed] cdb=None
+[2024-01-13 08:16:34,416] [INFO] [comm.py:668:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+[2024-01-13 08:16:35,024] [INFO] [comm.py:637:init_distributed] cdb=None
+Start the trainer
+Start the trainer
+[2024-01-13 08:16:36,664] [INFO] [comm.py:637:init_distributed] cdb=None
+Start the trainer
+Start the trainer
+[2024-01-13 08:17:26,696] [WARNING] [cpu_adam.py:84:__init__] FP16 params for CPUAdam may not work on AMD CPUs
+[2024-01-13 08:17:26,704] [WARNING] [cpu_adam.py:84:__init__] FP16 params for CPUAdam may not work on AMD CPUs
+[2024-01-13 08:17:26,725] [WARNING] [cpu_adam.py:84:__init__] FP16 params for CPUAdam may not work on AMD CPUs
+[2024-01-13 08:17:26,730] [WARNING] [cpu_adam.py:84:__init__] FP16 params for CPUAdam may not work on AMD CPUs
+Installed CUDA version 12.3 does not match the version torch was compiled with 12.1 but since the APIs are compatible, accepting this combination
+Installed CUDA version 12.3 does not match the version torch was compiled with 12.1 but since the APIs are compatible, accepting this combination
+Installed CUDA version 12.3 does not match the version torch was compiled with 12.1 but since the APIs are compatible, accepting this combination
+Installed CUDA version 12.3 does not match the version torch was compiled with 12.1 but since the APIs are compatible, accepting this combination
+ninja: no work to do.
+Time to load cpu_adam op: 2.460312604904175 seconds
+Time to load cpu_adam op: 2.49055814743042 seconds
+Time to load cpu_adam op: 2.5014219284057617 seconds
+Time to load cpu_adam op: 2.5054757595062256 seconds
+Parameter Offload: Total persistent parameters: 266240 in 65 params
+[2024-01-13 08:19:12,040] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 1220675
+[2024-01-13 08:19:24,325] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 1220676
+[2024-01-13 08:19:36,557] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 1220677
+[2024-01-13 08:19:36,558] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 1220678
+[2024-01-13 08:19:48,900] [ERROR] [launch.py:321:sigkill_handler] ['/home/guangleizhu/miniconda3/envs/torch2.1/bin/python', '-u', 'finetune_llama.py', '--local_rank=3'] exits with return code = 1

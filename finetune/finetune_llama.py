@@ -16,6 +16,10 @@ import wandb
 from deepspeed.runtime.zero.stage3 import estimate_zero3_model_states_mem_needs_all_live
 import random
 
+# set hf cache dir
+os.environ['TRANSFORMERS_CACHE'] = '/mnt/data6/guangleizhu'
+os.environ['HF_HOME'] = '/mnt/data6/guangleizhu'
+
 random.seed(42) 
 os.environ["WANDB__SERVICE_WAIT"] = "300"
 
@@ -33,9 +37,9 @@ DEFAULT_UNK_TOKEN = "</s>"
 # max_length = 720
 max_length = 512
 # f = "data/eval_mt_russian_llama.json"
-f = "/ocean/projects/cis230075p/gzhu/mqm_newstest2021_zhen_parsed.json"
+f = "/home/guangleizhu/reproduce_pinpoint/finetune/mqm_newstest2021_zhen_parsed.json"
 # output_dir = "/share/edc/home/wendaxu/finetune_llama_ref_russian_may_28"
-output_dir = "/ocean/projects/cis230075p/gzhu/ft_out"
+output_dir = "/home/guangleizhu/reproduce_pinpoint/finetune/ft_out"
 padding_strategy = "right"
 model_name = "meta-llama/Llama-2-7b-chat-hf"
 num_epoch = 1
