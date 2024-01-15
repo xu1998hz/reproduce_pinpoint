@@ -30,12 +30,14 @@ KEY_INSTANCES = "instances"
 ds_config = "config/ds_config_zero3.json"
 do_train = True
 IGNORE_INDEX = -100
-DEFAULT_PAD_TOKEN = "[PAD]"
+DEFAULT_PAD_TOKEN = "<PAD>"
 DEFAULT_EOS_TOKEN = "</s>"
-DEFAULT_BOS_TOKEN = "</s>"
-DEFAULT_UNK_TOKEN = "</s>"
+DEFAULT_BOS_TOKEN = "<s>"
+# DEFAULT_UNK_TOKEN = "</s>"
+# TODO: changed this
+DEFAULT_UNK_TOKEN = "<UNK>"
 # max_length = 720
-max_length = 512
+max_length = 1024
 # f = "data/eval_mt_russian_llama.json"
 f = "/home/guangleizhu/reproduce_pinpoint/finetune/mqm_newstest2021_zhen_parsed.json"
 # output_dir = "/share/edc/home/wendaxu/finetune_llama_ref_russian_may_28"
@@ -212,14 +214,10 @@ print("Start loading in tokenizers")
 # config = AutoConfig.from_pretrained(model_name)
 tokenizer = transformers.AutoTokenizer.from_pretrained(
     model_name,
-    model_max_length=max_length,
-    padding_side=padding_strategy,
+    # model_max_length=max_length,
+    # padding_side=padding_strategy,
     use_fast=False,
 )
-# #  TODO: double check this
-# if tokenizer.pad_token is None:
-#     tokenizer.add_special_tokens({"pad_token": "<pad>"})
-
 
 
 print(f"Start loading in model {model_name}")
@@ -231,17 +229,28 @@ model = AutoModelForCausalLM.from_pretrained(
         # torch_dtype=dtype, # fp16 for training, fp32 for inference
         # device_map='auto'
     )
+# model.resize_token_embeddings(len(tokenizer))
+
 
 # for check ram usage
-estimate_zero3_model_states_mem_needs_all_live(model, num_gpus_per_node=4, num_nodes=1)
+# estimate_zero3_model_states_mem_needs_all_live(model, num_gpus_per_node=4, num_nodes=1)
 
 # TODO: double check this
 if tokenizer.pad_token is None:
+    print("add pad token and resize embedding: True")
     smart_tokenizer_and_embedding_resize(
-        special_tokens_dict=dict(pad_token=DEFAULT_PAD_TOKEN),
+        special_tokens_dict=
+        {
+            "eos_token": DEFAULT_EOS_TOKEN,
+            "bos_token": DEFAULT_BOS_TOKEN,
+            "unk_token": DEFAULT_UNK_TOKEN,
+            "pad_token": DEFAULT_PAD_TOKEN,
+        },
         tokenizer=tokenizer,
         model=model,
     )
+else:
+    print("add pad token and resize embedding: False")
 
 tokenizer.add_special_tokens(
     {
@@ -272,7 +281,7 @@ training_args = TrainingArguments(
     output_dir=output_dir,
     evaluation_strategy="no",
     per_device_train_batch_size=1,
-    gradient_accumulation_steps=16,
+    gradient_accumulation_steps=24,
     learning_rate=1e-5,
     weight_decay=0,
     num_train_epochs=num_epoch,

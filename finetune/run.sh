@@ -2,8 +2,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=20
-#SBATCH --mem=512GB
-#SBATCH --gpus=4
+#SBATCH --mem=64GB
+#SBATCH --gpus=8
 #SBATCH --time=4:00:00
 #SBATCH --account=guangleizhu
 #SBATCH --partition=aries
@@ -27,4 +27,5 @@ nvidia-smi
 
 cd /home/guangleizhu/reproduce_pinpoint/finetune
 
-deepspeed --num_gpus 4 finetune_llama.py
+# CUDA_VISIBLE_DEVICES=4,5,7 deepspeed  --include localhost:4,5,7 finetune_llama.py
+deepspeed --include localhost:0,1,4,5,7 finetune_llama.py

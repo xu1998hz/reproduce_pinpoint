@@ -2,5 +2,6 @@
 out/data
 save/
 slurm_out/
+finetune/wandb
 # pycache
 __pycache__/

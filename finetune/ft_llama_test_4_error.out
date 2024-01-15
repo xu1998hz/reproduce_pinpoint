@@ -1,7 +1,8 @@
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:14<00:14, 14.47s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:14<00:14, 14.29s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:12<00:12, 12.84s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:15<00:15, 15.39s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:18<00:00,  8.21s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:18<00:00,  9.15s/it]
-Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  8.87s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  9.68s/it]
-Loading checkpoint shards: 100%|██████████| 2/2 [00:17<00:00,  8.29s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:17<00:00,  8.97s/it]
-Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  8.73s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  9.73s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.99s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.88s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.89s/it]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:08<00:08,  8.60s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:09<00:09,  9.31s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:09<00:09,  9.18s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:09<00:09,  9.77s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:10<00:00,  4.66s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:10<00:00,  5.36s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:10<00:00,  4.93s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:10<00:00,  5.48s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:11<00:00,  4.87s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:11<00:00,  5.61s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:11<00:00,  5.06s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:11<00:00,  5.67s/it]
 Using /home/guangleizhu/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
 Using /home/guangleizhu/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
 Detected CUDA files, patching ldflags
@@ -11,6 +12,12 @@ Allowing ninja to set a default number of workers... (overridable by setting the
 Using /home/guangleizhu/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
 Using /home/guangleizhu/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
 Loading extension module cpu_adam...
+Using /home/guangleizhu/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
+Detected CUDA files, patching ldflags
+Emitting ninja build file /home/guangleizhu/.cache/torch_extensions/py311_cu121/cpu_adam/build.ninja...
+Building extension module cpu_adam...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+Loading extension module cpu_adam...
 Loading extension module cpu_adam...
 Loading extension module cpu_adam...
 Loading extension module cpu_adam...
@@ -18,82 +25,215 @@ wandb: Currently logged in as: guanglei-zhu (ian-team). Use `wandb login --relog
 wandb: wandb version 0.16.2 is available!  To upgrade, please run:
 wandb:  $ pip install wandb --upgrade
 wandb: Tracking run with wandb version 0.16.0
-wandb: Run data is saved locally in /home/guangleizhu/reproduce_pinpoint/finetune/wandb/run-20240113_081849-aczmiu39
+wandb: Run data is saved locally in /home/guangleizhu/reproduce_pinpoint/finetune/wandb/run-20240114_234848-ocs2l4rw
 wandb: Run `wandb offline` to turn off syncing.
 wandb: Syncing run wandb
 wandb: ⭐️ View project at https://wandb.ai/ian-team/huggingface
-wandb: 🚀 View run at https://wandb.ai/ian-team/huggingface/runs/aczmiu39
-  0%|          | 0/107 [00:00<?, ?it/s]Traceback (most recent call last):
-  File "/home/guangleizhu/reproduce_pinpoint/finetune/finetune_llama.py", line 309, in <module>
+wandb: 🚀 View run at https://wandb.ai/ian-team/huggingface/runs/ocs2l4rw
+  0%|          | 0/57 [00:00<?, ?it/s]  2%|▏         | 1/57 [03:27<3:13:35, 207.42s/it]                                                   2%|▏         | 1/57 [03:27<3:13:35, 207.42s/it]  4%|▎         | 2/57 [06:49<3:07:07, 204.14s/it]                                                   4%|▎         | 2/57 [06:49<3:07:07, 204.14s/it]  5%|▌         | 3/57 [10:11<3:03:01, 203.36s/it]                                                   5%|▌         | 3/57 [10:11<3:03:01, 203.36s/it]  7%|▋         | 4/57 [13:35<2:59:46, 203.51s/it]                                                   7%|▋         | 4/57 [13:35<2:59:46, 203.51s/it]  9%|▉         | 5/57 [17:01<2:57:11, 204.46s/it]                                                   9%|▉         | 5/57 [17:01<2:57:11, 204.46s/it] 11%|█         | 6/57 [20:25<2:53:38, 204.28s/it]                                                  11%|█         | 6/57 [20:25<2:53:38, 204.28s/it] 12%|█▏        | 7/57 [23:46<2:49:23, 203.28s/it]                                                  12%|█▏        | 7/57 [23:46<2:49:23, 203.28s/it] 14%|█▍        | 8/57 [27:11<2:46:19, 203.65s/it]                                                  14%|█▍        | 8/57 [27:11<2:46:19, 203.65s/it] 16%|█▌        | 9/57 [30:32<2:42:25, 203.04s/it]                                                  16%|█▌        | 9/57 [30:32<2:42:25, 203.04s/it] 18%|█▊        | 10/57 [33:56<2:39:08, 203.15s/it]                                                   18%|█▊        | 10/57 [33:56<2:39:08, 203.15s/it] 19%|█▉        | 11/57 [37:16<2:35:07, 202.33s/it]                                                   19%|█▉        | 11/57 [37:16<2:35:07, 202.33s/it] 21%|██        | 12/57 [40:49<2:34:01, 205.37s/it]                                                   21%|██        | 12/57 [40:49<2:34:01, 205.37s/it] 23%|██▎       | 13/57 [44:12<2:30:12, 204.84s/it]                                                   23%|██▎       | 13/57 [44:12<2:30:12, 204.84s/it] 25%|██▍       | 14/57 [47:48<2:29:07, 208.09s/it]                                                   25%|██▍       | 14/57 [47:48<2:29:07, 208.09s/it] 26%|██▋       | 15/57 [51:06<2:23:31, 205.04s/it]                                                   26%|██▋       | 15/57 [51:06<2:23:31, 205.04s/it] 28%|██▊       | 16/57 [54:23<2:18:28, 202.64s/it]                                                   28%|██▊       | 16/57 [54:23<2:18:28, 202.64s/it] 30%|██▉       | 17/57 [57:41<2:14:11, 201.30s/it]                                                   30%|██▉       | 17/57 [57:41<2:14:11, 201.30s/it] 32%|███▏      | 18/57 [1:01:01<2:10:35, 200.90s/it]                                                     32%|███▏      | 18/57 [1:01:01<2:10:35, 200.90s/it] 33%|███▎      | 19/57 [1:04:28<2:08:25, 202.77s/it]                                                     33%|███▎      | 19/57 [1:04:28<2:08:25, 202.77s/it] 35%|███▌      | 20/57 [1:07:49<2:04:44, 202.30s/it]                                                     35%|███▌      | 20/57 [1:07:49<2:04:44, 202.30s/it] 37%|███▋      | 21/57 [1:11:07<2:00:33, 200.92s/it]                                                     37%|███▋      | 21/57 [1:11:07<2:00:33, 200.92s/it] 39%|███▊      | 22/57 [1:14:27<1:57:02, 200.66s/it]                                                     39%|███▊      | 22/57 [1:14:27<1:57:02, 200.66s/it]/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py:1330: UserWarning: The torch.cuda.*DtypeTensor constructors are no longer recommended. It's best to use methods such as torch.tensor(data, dtype=*, device='cuda') to create tensors. (Triggered internally at /opt/conda/conda-bld/pytorch_1699449201450/work/torch/csrc/tensor/python_tensor.cpp:83.)
+  total_norm_cuda = get_accelerator().FloatTensor([float(total_norm)])
+/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py:1330: UserWarning: The torch.cuda.*DtypeTensor constructors are no longer recommended. It's best to use methods such as torch.tensor(data, dtype=*, device='cuda') to create tensors. (Triggered internally at /opt/conda/conda-bld/pytorch_1699449201450/work/torch/csrc/tensor/python_tensor.cpp:83.)
+  total_norm_cuda = get_accelerator().FloatTensor([float(total_norm)])
+/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py:1330: UserWarning: The torch.cuda.*DtypeTensor constructors are no longer recommended. It's best to use methods such as torch.tensor(data, dtype=*, device='cuda') to create tensors. (Triggered internally at /opt/conda/conda-bld/pytorch_1699449201450/work/torch/csrc/tensor/python_tensor.cpp:83.)
+  total_norm_cuda = get_accelerator().FloatTensor([float(total_norm)])
+/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py:1330: UserWarning: The torch.cuda.*DtypeTensor constructors are no longer recommended. It's best to use methods such as torch.tensor(data, dtype=*, device='cuda') to create tensors. (Triggered internally at /opt/conda/conda-bld/pytorch_1699449201450/work/torch/csrc/tensor/python_tensor.cpp:83.)
+  total_norm_cuda = get_accelerator().FloatTensor([float(total_norm)])
+/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py:1330: UserWarning: The torch.cuda.*DtypeTensor constructors are no longer recommended. It's best to use methods such as torch.tensor(data, dtype=*, device='cuda') to create tensors. (Triggered internally at /opt/conda/conda-bld/pytorch_1699449201450/work/torch/csrc/tensor/python_tensor.cpp:83.)
+  total_norm_cuda = get_accelerator().FloatTensor([float(total_norm)])
+ 40%|████      | 23/57 [1:17:56<1:55:07, 203.17s/it]                                                     40%|████      | 23/57 [1:17:56<1:55:07, 203.17s/it] 42%|████▏     | 24/57 [1:21:20<1:51:52, 203.40s/it]                                                     42%|████▏     | 24/57 [1:21:20<1:51:52, 203.40s/it] 44%|████▍     | 25/57 [1:24:40<1:47:57, 202.43s/it]                                                     44%|████▍     | 25/57 [1:24:40<1:47:57, 202.43s/it] 46%|████▌     | 26/57 [1:28:13<1:46:14, 205.62s/it]                                                     46%|████▌     | 26/57 [1:28:13<1:46:14, 205.62s/it] 47%|████▋     | 27/57 [1:31:41<1:43:10, 206.36s/it]                                                     47%|████▋     | 27/57 [1:31:41<1:43:10, 206.36s/it] 49%|████▉     | 28/57 [1:35:07<1:39:34, 206.03s/it]                                                     49%|████▉     | 28/57 [1:35:07<1:39:34, 206.03s/it] 51%|█████     | 29/57 [1:38:32<1:36:03, 205.83s/it]                                                     51%|█████     | 29/57 [1:38:32<1:36:03, 205.83s/it] 53%|█████▎    | 30/57 [1:41:59<1:32:50, 206.33s/it]                                                     53%|█████▎    | 30/57 [1:41:59<1:32:50, 206.33s/it] 54%|█████▍    | 31/57 [1:45:32<1:30:10, 208.08s/it]                                                     54%|█████▍    | 31/57 [1:45:32<1:30:10, 208.08s/it] 56%|█████▌    | 32/57 [1:49:07<1:27:35, 210.21s/it]                                                     56%|█████▌    | 32/57 [1:49:07<1:27:35, 210.21s/it] 58%|█████▊    | 33/57 [1:52:33<1:23:38, 209.12s/it]                                                     58%|█████▊    | 33/57 [1:52:33<1:23:38, 209.12s/it] 60%|█████▉    | 34/57 [1:55:55<1:19:18, 206.87s/it]                                                     60%|█████▉    | 34/57 [1:55:55<1:19:18, 206.87s/it] 61%|██████▏   | 35/57 [1:59:25<1:16:09, 207.69s/it]                                                     61%|██████▏   | 35/57 [1:59:25<1:16:09, 207.69s/it]Traceback (most recent call last):
+  File "/home/guangleizhu/reproduce_pinpoint/finetune/finetune_llama.py", line 318, in <module>
     train_result = trainer.train()
                    ^^^^^^^^^^^^^^^
   File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 1555, in train
     return inner_training_loop(
            ^^^^^^^^^^^^^^^^^^^^
   File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 1860, in _inner_training_loop
+Traceback (most recent call last):
+    tr_loss_step = self.training_step(model, inputs)
+Traceback (most recent call last):
+  File "/home/guangleizhu/reproduce_pinpoint/finetune/finetune_llama.py", line 318, in <module>
+     File "/home/guangleizhu/reproduce_pinpoint/finetune/finetune_llama.py", line 318, in <module>
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 2734, in training_step
+Traceback (most recent call last):
+  File "/home/guangleizhu/reproduce_pinpoint/finetune/finetune_llama.py", line 318, in <module>
+    train_result = trainer.train()    
+train_result = trainer.train()
+                         self.accelerator.backward(loss)  
+      train_result = trainer.train()  
+    File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/accelerate/accelerator.py", line 1983, in backward
+     ^  ^    ^  ^  ^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^  ^^ ^^^ ^
+ ^^^^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 1555, in train
+^
+^^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 1555, in train
+^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 1555, in train
+    return inner_training_loop(    
+return inner_training_loop(
+                    self.deepspeed_engine_wrapped.backward(loss, **kwargs)  
+   ^ ^^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/accelerate/utils/deepspeed.py", line 176, in backward
+^^^^^^^^^^^^^^^^^^^    ^^return inner_training_loop(^^^^
+^^^^^ ^^^ 
+^     ^   File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 1860, in _inner_training_loop
+self.engine.step()^ 
+
+    File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 1860, in _inner_training_loop
+   File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2148, in step
+   ^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 1860, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+                   ^^^^^    ^tr_loss_step = self.training_step(model, inputs)^
+^^^^^^^^^    ^self._take_model_step(lr_kwargs)^
+^^^^^^^^^^^^    ^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2054, in _take_model_step
+tr_loss_step = self.training_step(model, inputs)^
+^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 2734, in training_step
+                              self.optimizer.step()
+^  ^ ^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+ ^ ^     ^     self.accelerator.backward(loss)
+^ret_val = func(*args, **kwargs) ^
+ ^   ^   File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/accelerate/accelerator.py", line 1983, in backward
+   ^  ^^ ^^^ ^^ ^^ ^^ Traceback (most recent call last):
+^^ ^^ ^^     self.deepspeed_engine_wrapped.backward(loss, **kwargs)^^^
+^^^^^^^^^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/accelerate/utils/deepspeed.py", line 176, in backward
+^^^^^^^^^^^^^^    ^^^^self.engine.step()^^^
+^^^^^^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2148, in step
+^^^^^^^^
+^^^^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 2734, in training_step
+^^^^
+^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 1946, in step
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 2734, in training_step
+    self._take_model_step(lr_kwargs)
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2054, in _take_model_step
+    if self._overflow_check_and_loss_scale_update():
+       ^^^^^^^^^^    ^  File "/home/guangleizhu/reproduce_pinpoint/finetune/finetune_llama.py", line 318, in <module>
+    train_result = trainer.train()
+                   ^^^^^^^^^^^^^^^
+self.accelerator.backward(loss)^
+^^^^^^^^^^^^^^^^^^^^^^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/accelerate/accelerator.py", line 1983, in backward
+^^    ^^^^self.optimizer.step()^    
+^self.accelerator.backward(loss)^
+
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 1555, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)    
+ret_val = func(*args, **kwargs)  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/accelerate/accelerator.py", line 1983, in backward
+    
+ self.deepspeed_engine_wrapped.backward(loss, **kwargs) 
+          File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/accelerate/utils/deepspeed.py", line 176, in backward
+    File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 1860, in _inner_training_loop
     tr_loss_step = self.training_step(model, inputs)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 2725, in training_step
-    loss = self.compute_loss(model, inputs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 2748, in compute_loss
-    outputs = model(**inputs)
-              ^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+              self.engine.step()
+     ^ ^^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2148, in step
+^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/trainer.py", line 2734, in training_step
+    self.accelerator.backward(loss)
+^^^^^^^^^^^^^^^    ^^^self.deepspeed_engine_wrapped.backward(loss, **kwargs)^^^^
+^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/accelerate/accelerator.py", line 1983, in backward
+    self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+^^^^^^^^^^^    
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/accelerate/utils/deepspeed.py", line 176, in backward
+^self._take_model_step(lr_kwargs)^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 1894, in _overflow_check_and_loss_scale_update
+
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 1946, in step
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/accelerate/utils/deepspeed.py", line 176, in backward
+    self.engine.step()
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2054, in _take_model_step
+    self.engine.step()
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2148, in step
+    self._update_scale(self.overflow)
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2148, in step
+    self._take_model_step(lr_kwargs)
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 2281, in _update_scale
+    if self._overflow_check_and_loss_scale_update():
+    self.optimizer.step()
+       File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2054, in _take_model_step
+    self.optimizer.step()
+  ^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+^^^^    ^self.loss_scaler.update_scale(has_overflow)^
+^    ^ret_val = func(*args, **kwargs)
+^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 175, in update_scale
+^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
     ret_val = func(*args, **kwargs)
               ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 1833, in forward
-    loss = self.module(*inputs, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1568, in _call_impl
-    result = forward_call(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 1034, in forward
-    outputs = self.model(
-              ^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1568, in _call_impl
-    result = forward_call(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 922, in forward
-    layer_outputs = decoder_layer(
-                    ^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1568, in _call_impl
-    result = forward_call(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 686, in forward
-    hidden_states = self.mlp(hidden_states)
-                    ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1568, in _call_impl
-    result = forward_call(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 258, in forward
-    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
-                                                                ^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1568, in _call_impl
-    result = forward_call(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 114, in forward
-    return F.linear(input, self.weight, self.bias)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 12.00 MiB. GPU 2 has a total capacty of 47.54 GiB of which 4.88 MiB is free. Process 2347441 has 14.66 GiB memory in use. Process 3257603 has 14.66 GiB memory in use. Process 1155825 has 262.00 MiB memory in use. Process 1169738 has 262.00 MiB memory in use. Process 1187407 has 262.00 MiB memory in use. Including non-PyTorch memory, this process has 17.13 GiB memory in use. Process 1253405 has 262.00 MiB memory in use. Of the allocated memory 15.34 GiB is allocated by PyTorch, and 194.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+^^ ^     ^ self._take_model_step(lr_kwargs)^      
+^raise Exception( ^
+ ^^^ Exception  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 1946, in step
+    if self._overflow_check_and_loss_scale_update():
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^ : ^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2054, in _take_model_step
+ Current loss scale already at minimum - cannot decrease scale anymore. Exiting run.^ 
+^ ^ ^ ^^^^^^^^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
+^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 1894, in _overflow_check_and_loss_scale_update
+    self._update_scale(self.overflow)
+^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 1946, in step
+    ret_val = func(*args, **kwargs)
+          self.optimizer.step() 
+   File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 2281, in _update_scale
+    self.loss_scaler.update_scale(has_overflow)
+      ^^^^^^^^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 1894, in _overflow_check_and_loss_scale_update
+    ret_val = func(*args, **kwargs)
+      File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 175, in update_scale
+    raise Exception(
+if self._overflow_check_and_loss_scale_update():
+                  ^self._update_scale(self.overflow)
+^ ^ ^^   File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 2281, in _update_scale
+Exception: Current loss scale already at minimum - cannot decrease scale anymore. Exiting run.
+^ ^ ^ ^ ^^^^^^^^^^^^^^^^^^    ^^self.loss_scaler.update_scale(has_overflow)^^
+^^
+^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 1946, in step
+^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 175, in update_scale
+^^^^^^^^^^^^    raise Exception(^
+^^^Exception^: ^Current loss scale already at minimum - cannot decrease scale anymore. Exiting run.^
+^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+                if self._overflow_check_and_loss_scale_update():  
+^^^^^^^^^ ^ ^ ^^ ^ ^ ^ ^^^^^^^^^
+^^  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 1894, in _overflow_check_and_loss_scale_update
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    self._update_scale(self.overflow)
+    ret_val = func(*args, **kwargs)
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 2281, in _update_scale
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 1894, in _overflow_check_and_loss_scale_update
+    self.loss_scaler.update_scale(has_overflow)
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 175, in update_scale
+    raise Exception(
+Exception: Current loss scale already at minimum - cannot decrease scale anymore. Exiting run.
+    self._update_scale(self.overflow)
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 2281, in _update_scale
+    self.loss_scaler.update_scale(has_overflow)
+  File "/home/guangleizhu/miniconda3/envs/torch2.1/lib/python3.11/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 175, in update_scale
+    raise Exception(
+Exception: Current loss scale already at minimum - cannot decrease scale anymore. Exiting run.
+wandb: 
+wandb: Run history:
+wandb:         train/epoch ▁▁▁▂▂▂▂▂▃▃▃▃▃▄▄▄▄▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇███
+wandb:   train/global_step ▁▁▁▂▂▂▂▂▃▃▃▃▃▄▄▄▄▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇███
+wandb: train/learning_rate ██████████████████████▆▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:          train/loss ▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▃▂▄▃▃▅▂▆▆▂█
+wandb: 
+wandb: Run summary:
+wandb:         train/epoch 0.61
+wandb:   train/global_step 35
+wandb: train/learning_rate 1e-05
+wandb:          train/loss 24.0047
+wandb: 
+wandb: 🚀 View run wandb at: https://wandb.ai/ian-team/huggingface/runs/ocs2l4rw
+wandb: ️⚡ View job at https://wandb.ai/ian-team/huggingface/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMDEwOTMzNg==/version_details/v2
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240114_234848-ocs2l4rw/logs
