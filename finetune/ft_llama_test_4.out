@@ -1,193 +1,1407 @@
-Sun Jan 14 23:45:18 2024       
-+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 525.125.06   Driver Version: 525.125.06   CUDA Version: 12.0     |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|                               |                      |               MIG M. |
-|===============================+======================+======================|
-|   0  NVIDIA RTX A6000    Off  | 00000000:01:00.0 Off |                  Off |
-| 30%   37C    P8    31W / 300W |      1MiB / 49140MiB |      0%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-|   1  NVIDIA RTX A6000    Off  | 00000000:25:00.0 Off |                  Off |
-| 30%   34C    P8    37W / 300W |      1MiB / 49140MiB |      0%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-|   2  NVIDIA RTX A6000    Off  | 00000000:41:00.0 Off |                  Off |
-| 30%   48C    P2    77W / 300W |  30035MiB / 49140MiB |      0%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-|   3  NVIDIA RTX A6000    Off  | 00000000:61:00.0 Off |                  Off |
-| 30%   31C    P8    27W / 300W |  11803MiB / 49140MiB |      0%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-|   4  NVIDIA RTX A6000    Off  | 00000000:81:00.0 Off |                  Off |
-| 30%   33C    P8    29W / 300W |      1MiB / 49140MiB |      0%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-|   5  NVIDIA RTX A6000    Off  | 00000000:A1:00.0 Off |                  Off |
-| 30%   29C    P8    32W / 300W |      1MiB / 49140MiB |      0%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-|   6  NVIDIA RTX A6000    Off  | 00000000:C1:00.0 Off |                  Off |
-| 30%   49C    P2    80W / 300W |  15055MiB / 49140MiB |      0%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-|   7  NVIDIA RTX A6000    Off  | 00000000:E1:00.0 Off |                  Off |
-| 30%   31C    P8    30W / 300W |      1MiB / 49140MiB |      0%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-                                                                               
-+-----------------------------------------------------------------------------+
-| Processes:                                                                  |
-|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
-|        ID   ID                                                   Usage      |
-|=============================================================================|
-|    3   N/A  N/A    158166      C   python                            262MiB |
-+-----------------------------------------------------------------------------+
-[2024-01-14 23:45:22,111] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2024-01-14 23:45:24,787] [WARNING] [runner.py:202:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
-Detected CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 but ignoring it because one or several of --include/--exclude/--num_gpus/--num_nodes cl args were used. If you want to use CUDA_VISIBLE_DEVICES don't pass any of these arguments to deepspeed.
-[2024-01-14 23:45:24,788] [INFO] [runner.py:571:main] cmd = /home/guangleizhu/miniconda3/envs/torch2.1/bin/python -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMCwgMSwgNCwgNSwgN119 --master_addr=127.0.0.1 --master_port=29500 --enable_each_rank_log=None finetune_llama.py
-[2024-01-14 23:45:27,783] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2024-01-14 23:45:30,143] [INFO] [launch.py:145:main] WORLD INFO DICT: {'localhost': [0, 1, 4, 5, 7]}
-[2024-01-14 23:45:30,144] [INFO] [launch.py:151:main] nnodes=1, num_local_procs=5, node_rank=0
-[2024-01-14 23:45:30,144] [INFO] [launch.py:162:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0, 1, 2, 3, 4]})
-[2024-01-14 23:45:30,144] [INFO] [launch.py:163:main] dist_world_size=5
-[2024-01-14 23:45:30,144] [INFO] [launch.py:165:main] Setting CUDA_VISIBLE_DEVICES=0,1,4,5,7
-[2024-01-14 23:45:36,007] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2024-01-14 23:45:36,053] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2024-01-14 23:45:36,058] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2024-01-14 23:45:36,068] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2024-01-14 23:45:36,077] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-Dataset({
-    features: ['output', 'input'],
-    num_rows: 6847
-}) Dataset({
-    features: ['output', 'input'],
-    num_rows: 5
-})
+Mon Jan 15 22:21:28 2024       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 545.23.08              Driver Version: 545.23.08    CUDA Version: 12.3     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  Tesla V100-SXM2-32GB           On  | 00000000:15:00.0 Off |                    0 |
+| N/A   30C    P0              39W / 300W |      0MiB / 32768MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   1  Tesla V100-SXM2-32GB           On  | 00000000:3A:00.0 Off |                    0 |
+| N/A   28C    P0              40W / 300W |      0MiB / 32768MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   2  Tesla V100-SXM2-32GB           On  | 00000000:3B:00.0 Off |                    0 |
+| N/A   31C    P0              39W / 300W |      0MiB / 32768MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+|   3  Tesla V100-SXM2-32GB           On  | 00000000:B3:00.0 Off |                    0 |
+| N/A   39C    P0              40W / 300W |      0MiB / 32768MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+[2024-01-15 22:22:29,317] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-01-15 22:22:52,132] [WARNING] [runner.py:202:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Detected CUDA_VISIBLE_DEVICES=0,1,2,3 but ignoring it because one or several of --include/--exclude/--num_gpus/--num_nodes cl args were used. If you want to use CUDA_VISIBLE_DEVICES don't pass any of these arguments to deepspeed.
+[2024-01-15 22:22:52,132] [INFO] [runner.py:571:main] cmd = /ocean/projects/cis230075p/gzhu/miniconda3/envs/test/bin/python -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMCwgMSwgMiwgM119 --master_addr=127.0.0.1 --master_port=29500 --enable_each_rank_log=None finetune_llama.py
+[2024-01-15 22:22:54,558] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-01-15 22:22:55,932] [INFO] [launch.py:145:main] WORLD INFO DICT: {'localhost': [0, 1, 2, 3]}
+[2024-01-15 22:22:55,932] [INFO] [launch.py:151:main] nnodes=1, num_local_procs=4, node_rank=0
+[2024-01-15 22:22:55,933] [INFO] [launch.py:162:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0, 1, 2, 3]})
+[2024-01-15 22:22:55,933] [INFO] [launch.py:163:main] dist_world_size=4
+[2024-01-15 22:22:55,933] [INFO] [launch.py:165:main] Setting CUDA_VISIBLE_DEVICES=0,1,2,3
+[2024-01-15 22:23:38,941] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-01-15 22:23:38,941] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-01-15 22:23:38,941] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-01-15 22:23:38,941] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Start loading in tokenizersStart loading in tokenizersStart loading in tokenizers
 Start loading in tokenizers
-Dataset({
-    features: ['output', 'input'],
-    num_rows: 6847
-}) Dataset({
-    features: ['output', 'input'],
-    num_rows: 5
-})
-Start loading in tokenizers
-Dataset({
-    features: ['output', 'input'],
-    num_rows: 6847
-}) Dataset({
-    features: ['output', 'input'],
-    num_rows: 5
-})
-Start loading in tokenizers
-Dataset({
-    features: ['output', 'input'],
-    num_rows: 6847
-}) Dataset({
-    features: ['output', 'input'],
-    num_rows: 5
-})
-Start loading in tokenizers
-Dataset({
-    features: ['output', 'input'],
-    num_rows: 6847
-}) Dataset({
-    features: ['output', 'input'],
-    num_rows: 5
-})
-Start loading in tokenizers
-Start loading in model meta-llama/Llama-2-7b-chat-hf
-Start loading in model meta-llama/Llama-2-7b-chat-hf
-Start loading in model meta-llama/Llama-2-7b-chat-hf
+
+
+Start loading in model meta-llama/Llama-2-7b-chat-hfStart loading in model meta-llama/Llama-2-7b-chat-hf
+
 Start loading in model meta-llama/Llama-2-7b-chat-hf
 Start loading in model meta-llama/Llama-2-7b-chat-hf
 add pad token and resize embedding: True
 add pad token and resize embedding: True
 add pad token and resize embedding: True
 add pad token and resize embedding: True
-add pad token and resize embedding: True
+{'bos_token': '<s>', 'eos_token': '</s>', 'unk_token': '<unk>', 'pad_token': '<pad>'}
 Loaded in model and tokenizers
 Start making data module
+{'bos_token': '<s>', 'eos_token': '</s>', 'unk_token': '<unk>', 'pad_token': '<pad>'}
 Loaded in model and tokenizers
 Start making data module
+{'bos_token': '<s>', 'eos_token': '</s>', 'unk_token': '<unk>', 'pad_token': '<pad>'}
 Loaded in model and tokenizers
 Start making data module
+{'bos_token': '<s>', 'eos_token': '</s>', 'unk_token': '<unk>', 'pad_token': '<pad>'}
 Loaded in model and tokenizers
 Start making data module
-Loaded in model and tokenizers
-Start making data module
-[2024-01-14 23:46:58,947] [INFO] [comm.py:637:init_distributed] cdb=None
-[2024-01-14 23:47:01,123] [INFO] [comm.py:637:init_distributed] cdb=None
-[2024-01-14 23:47:01,123] [INFO] [comm.py:668:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
-[2024-01-14 23:47:01,543] [INFO] [comm.py:637:init_distributed] cdb=None
-[2024-01-14 23:47:01,910] [INFO] [comm.py:637:init_distributed] cdb=None
-[2024-01-14 23:47:02,256] [INFO] [comm.py:637:init_distributed] cdb=None
+{'input_ids': tensor([[    1,   518, 25580, 29962,  3532, 14816, 29903,  6778,    13,  3492,
+           526,   263,  4933, 13962, 16705,  1904, 29892,  8688,   304, 12534,
+          3149,  1059, 14354, 29892, 12439,  1059,  4072, 29892,   322, 24809,
+          1009,  2775,   537,   297,  5578,   800, 29889,    13, 29966,   829,
+         14816, 29903,  6778,    13,    13,  3492,   526,  6161,  1218,   263,
+         10013, 29899,   517, 29899, 24636,  6189, 13962,  3414, 29889,   450,
+          2752,   338,   525, 31393, 30763, 31389,   232,   145,   137, 30911,
+           235,   134,   143, 31495, 29892, 31043, 30548, 31795,   232,   140,
+           170,   236,   133,   150, 30667,   232,   138,   163, 31412, 31656,
+           234,   166,   171, 29892, 31650,   232,   140,   170, 30993, 31467,
+           233,   141,   155,   234,   134,   170,   235,   135,   148, 30267,
+          4286,   450,  1904,  5759, 13962,   338,   525,  7504,  3278,   304,
+           445, 15839,  3239, 29892,   360,   996,   612, 12323, 29892,   263,
+          1532, 29899,  5203,  4315, 13236, 29892,   756,  1248,  3276,   445,
+          2706,  3196,  3064, 29892,   607,  3732,   278,  6492, 16263, 17269,
+           322, 17294, 29899, 18712,   292, 29889,  4286,  3529, 12439,   599,
+          4436,   297,   278, 13962, 29892,   701,   304,   263,  7472,   310,
+          5320, 29889,  1152,  1269,  1059, 29892,  3113,  2367,   592,   278,
+          6590,  1059,  4423, 29892,  1059,  1134,   322,  4655, 29914,  1195,
+           272,  3858,   363,  1269,  1059, 29889, 11019,  4436,   508,  1970,
+          1509,   470,  3984,   280,   328,   278,  9591,  2861,   304,  7282,
+          1735,   297,  6593, 29892,  1550,  9461,  4436,  1016, 29915, 29873,
+          3275,   304,  6410,   310,  6593,   541,   674,   367, 10548, 29889,
+           518, 29914, 25580, 29962,  3575,  4103, 18411,  3743, 29871, 29906,
+          4436, 29901,    13,  2392, 17015, 29871, 29896, 29901,   525,  3733,
+          3276,   445,  2706,   742,  4829,  5167, 29901,  4831,   332,  4135,
+         29914, 29924,  2132,   550, 18411, 29892, 14621,   537, 29901, 11019,
+            13,  2392, 17015, 29871, 29906, 29901,   525, 29873,   441, 17269,
+           322, 17294, 29899, 18712,   292,   742,  4829,  5167, 29901,  4831,
+           332,  4135, 29914, 29924,  2132,   550, 18411, 29892, 14621,   537,
+         29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'labels': tensor([[ -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  4103, 18411,  3743, 29871, 29906,
+          4436, 29901,    13,  2392, 17015, 29871, 29896, 29901,   525,  3733,
+          3276,   445,  2706,   742,  4829,  5167, 29901,  4831,   332,  4135,
+         29914, 29924,  2132,   550, 18411, 29892, 14621,   537, 29901, 11019,
+            13,  2392, 17015, 29871, 29906, 29901,   525, 29873,   441, 17269,
+           322, 17294, 29899, 18712,   292,   742,  4829,  5167, 29901,  4831,
+           332,  4135, 29914, 29924,  2132,   550, 18411, 29892, 14621,   537,
+         29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'attention_mask': tensor([[ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False]])}
+<s> [INST] <<SYS>>
+You are a machine translation feedback model, designed to pinpoint error locations, identify error types, and assess their severity in translations.
+<</SYS>>
+
+You are evaluating a Chinese-to-English Machine translation task. The source is '根据此历史背景,知名编剧邓原几经打磨,令剧情曲折烧脑。'. The model generated translation is 'According to this historical background, Deng Yuan, a well-known screenwriter, has polished this film several times, which makes the plot tortuous and brain-burning.'. Please identify all errors in the translation, up to a maximum of five. For each error, please give me the corresponding error location, error type and major/minor label for each error. Major errors can confuse or mislead the reader due to significant change in meaning, while minor errors don't lead to loss of meaning but will be noticed. [/INST] Your Translation contains 2 errors:
+Error Location 1: 'polished this film', Error Type: Accuracy/Mistranslation, Severity: Major
+Error Location 2: 'tortuous and brain-burning', Error Type: Accuracy/Mistranslation, Severity: Major</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>
+====================
+{'input_ids': tensor([[    1,   518, 25580, 29962,  3532, 14816, 29903,  6778,    13,  3492,
+           526,   263,  4933, 13962, 16705,  1904, 29892,  8688,   304, 12534,
+          3149,  1059, 14354, 29892, 12439,  1059,  4072, 29892,   322, 24809,
+          1009,  2775,   537,   297,  5578,   800, 29889,    13, 29966,   829,
+         14816, 29903,  6778,    13,    13,  3492,   526,  6161,  1218,   263,
+         10013, 29899,   517, 29899, 24636,  6189, 13962,  3414, 29889,   450,
+          2752,   338,   525, 31221, 30746, 30858, 30214, 31141, 30467, 31014,
+         31260, 30724, 30505, 30956, 30909, 30374, 30967, 30257,   232,   180,
+           194, 30329, 30210, 31709,   234,   178,   156,   233,   188,   193,
+           233,   166,   131,   234,   153,   174, 30275, 30869,   236,   156,
+           135, 31830, 31914, 30886,   236,   157,   151,   234,   169,   190,
+           233,   166,   131,   234,   153,   174, 30872,   233,   153,   192,
+         30214,   236,   165,   135, 31466, 30682, 30505, 29929, 30534,   232,
+           189,   152, 30658, 31302,   231,   193,   158,   236,   165,   160,
+         31066, 29955, 29900, 29900,   232,   168,   154,   236,   157,   151,
+           234,   169,   190, 31975, 30267,  4286,   450,  1904,  5759, 13962,
+           338,   525,  3868,  1497,   393,   278,   317,  1718,  5874,   338,
+          3386,   292,   385, 11695,   362,   322, 20089, 20578, 24454,  2978,
+           278,   678,  2679,   476,  1251,   399,   273,   751,   279, 20578,
+          7817,   297, 10523,   728,   273, 29892,  1570, 19833,  3842, 29892,
+           322,   338,  3806,   304,  3867, 29871, 29955, 29900, 29900,  5684,
+         11695,   362, 19600,   491,   278,  1095,   310,  3839, 29889,  4286,
+          3529, 12439,   599,  4436,   297,   278, 13962, 29892,   701,   304,
+           263,  7472,   310,  5320, 29889,  1152,  1269,  1059, 29892,  3113,
+          2367,   592,   278,  6590,  1059,  4423, 29892,  1059,  1134,   322,
+          4655, 29914,  1195,   272,  3858,   363,  1269,  1059, 29889, 11019,
+          4436,   508,  1970,  1509,   470,  3984,   280,   328,   278,  9591,
+          2861,   304,  7282,  1735,   297,  6593, 29892,  1550,  9461,  4436,
+          1016, 29915, 29873,  3275,   304,  6410,   310,  6593,   541,   674,
+           367, 10548, 29889,   518, 29914, 25580, 29962,  3575,  4103, 18411,
+          3743, 29871, 29946,  4436, 29901,    13,  2392, 17015, 29871, 29896,
+         29901,   525,   275, 22671,   322, 20089, 20578, 24454,   742,  4829,
+          5167, 29901, 11814,   262,  3002, 29914,   797,   932,  6649,   403,
+           363,  3030, 29892, 14621,   537, 29901, 11019,    13,  2392, 17015,
+         29871, 29906, 29901,   525,  1451,  2679,   476,  1251,   399,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29941, 29901,   525, 29911, 29874,   728,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29946, 29901,   525,   275, 22671,   742,  4829,
+          5167, 29901, 22135, 29914, 29909, 29893, 29895,  1328, 29892, 14621,
+           537, 29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'labels': tensor([[ -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  4103, 18411,
+          3743, 29871, 29946,  4436, 29901,    13,  2392, 17015, 29871, 29896,
+         29901,   525,   275, 22671,   322, 20089, 20578, 24454,   742,  4829,
+          5167, 29901, 11814,   262,  3002, 29914,   797,   932,  6649,   403,
+           363,  3030, 29892, 14621,   537, 29901, 11019,    13,  2392, 17015,
+         29871, 29906, 29901,   525,  1451,  2679,   476,  1251,   399,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29941, 29901,   525, 29911, 29874,   728,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29946, 29901,   525,   275, 22671,   742,  4829,
+          5167, 29901, 22135, 29914, 29909, 29893, 29895,  1328, 29892, 14621,
+           537, 29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'attention_mask': tensor([[ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False]])}
+<s> [INST] <<SYS>>
+You are a machine translation feedback model, designed to pinpoint error locations, identify error types, and assess their severity in translations.
+<</SYS>>
+
+You are evaluating a Chinese-to-English Machine translation task. The source is '他表示，特区政府正在位于新界大屿山的竹篙湾检疫中心附近兴建隔离检疫设施，预计可在9月底前提供额外700套隔离房。'. The model generated translation is 'He said that the SAR government is constructing an isolation and quarantine facility near the Chuk Kho Wan Quarantine Center in Taishan, New Territories, and is expected to provide 700 additional isolation rooms by the end of September.'. Please identify all errors in the translation, up to a maximum of five. For each error, please give me the corresponding error location, error type and major/minor label for each error. Major errors can confuse or mislead the reader due to significant change in meaning, while minor errors don't lead to loss of meaning but will be noticed. [/INST] Your Translation contains 4 errors:
+Error Location 1: 'isolation and quarantine facility', Error Type: Terminology/Inappropriate for context, Severity: Major
+Error Location 2: 'Chuk Kho Wan', Error Type: Terminology/Inappropriate for context, Severity: Major
+Error Location 3: 'Taishan', Error Type: Terminology/Inappropriate for context, Severity: Major
+Error Location 4: 'isolation', Error Type: Style/Awkward, Severity: Major</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>
+====================
+[2024-01-15 22:26:56,284] [INFO] [comm.py:637:init_distributed] cdb=None
+{'input_ids': tensor([[    1,   518, 25580, 29962,  3532, 14816, 29903,  6778,    13,  3492,
+           526,   263,  4933, 13962, 16705,  1904, 29892,  8688,   304, 12534,
+          3149,  1059, 14354, 29892, 12439,  1059,  4072, 29892,   322, 24809,
+          1009,  2775,   537,   297,  5578,   800, 29889,    13, 29966,   829,
+         14816, 29903,  6778,    13,    13,  3492,   526,  6161,  1218,   263,
+         10013, 29899,   517, 29899, 24636,  6189, 13962,  3414, 29889,   450,
+          2752,   338,   525, 31393, 30763, 31389,   232,   145,   137, 30911,
+           235,   134,   143, 31495, 29892, 31043, 30548, 31795,   232,   140,
+           170,   236,   133,   150, 30667,   232,   138,   163, 31412, 31656,
+           234,   166,   171, 29892, 31650,   232,   140,   170, 30993, 31467,
+           233,   141,   155,   234,   134,   170,   235,   135,   148, 30267,
+          4286,   450,  1904,  5759, 13962,   338,   525,  7504,  3278,   304,
+           445, 15839,  3239, 29892,   360,   996,   612, 12323, 29892,   263,
+          1532, 29899,  5203,  4315, 13236, 29892,   756,  1248,  3276,   445,
+          2706,  3196,  3064, 29892,   607,  3732,   278,  6492, 16263, 17269,
+           322, 17294, 29899, 18712,   292, 29889,  4286,  3529, 12439,   599,
+          4436,   297,   278, 13962, 29892,   701,   304,   263,  7472,   310,
+          5320, 29889,  1152,  1269,  1059, 29892,  3113,  2367,   592,   278,
+          6590,  1059,  4423, 29892,  1059,  1134,   322,  4655, 29914,  1195,
+           272,  3858,   363,  1269,  1059, 29889, 11019,  4436,   508,  1970,
+          1509,   470,  3984,   280,   328,   278,  9591,  2861,   304,  7282,
+          1735,   297,  6593, 29892,  1550,  9461,  4436,  1016, 29915, 29873,
+          3275,   304,  6410,   310,  6593,   541,   674,   367, 10548, 29889,
+           518, 29914, 25580, 29962,  3575,  4103, 18411,  3743, 29871, 29906,
+          4436, 29901,    13,  2392, 17015, 29871, 29896, 29901,   525,  3733,
+          3276,   445,  2706,   742,  4829,  5167, 29901,  4831,   332,  4135,
+         29914, 29924,  2132,   550, 18411, 29892, 14621,   537, 29901, 11019,
+            13,  2392, 17015, 29871, 29906, 29901,   525, 29873,   441, 17269,
+           322, 17294, 29899, 18712,   292,   742,  4829,  5167, 29901,  4831,
+           332,  4135, 29914, 29924,  2132,   550, 18411, 29892, 14621,   537,
+         29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'labels': tensor([[ -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  4103, 18411,  3743, 29871, 29906,
+          4436, 29901,    13,  2392, 17015, 29871, 29896, 29901,   525,  3733,
+          3276,   445,  2706,   742,  4829,  5167, 29901,  4831,   332,  4135,
+         29914, 29924,  2132,   550, 18411, 29892, 14621,   537, 29901, 11019,
+            13,  2392, 17015, 29871, 29906, 29901,   525, 29873,   441, 17269,
+           322, 17294, 29899, 18712,   292,   742,  4829,  5167, 29901,  4831,
+           332,  4135, 29914, 29924,  2132,   550, 18411, 29892, 14621,   537,
+         29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'attention_mask': tensor([[ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False]])}
+<s> [INST] <<SYS>>
+You are a machine translation feedback model, designed to pinpoint error locations, identify error types, and assess their severity in translations.
+<</SYS>>
+
+You are evaluating a Chinese-to-English Machine translation task. The source is '根据此历史背景,知名编剧邓原几经打磨,令剧情曲折烧脑。'. The model generated translation is 'According to this historical background, Deng Yuan, a well-known screenwriter, has polished this film several times, which makes the plot tortuous and brain-burning.'. Please identify all errors in the translation, up to a maximum of five. For each error, please give me the corresponding error location, error type and major/minor label for each error. Major errors can confuse or mislead the reader due to significant change in meaning, while minor errors don't lead to loss of meaning but will be noticed. [/INST] Your Translation contains 2 errors:
+Error Location 1: 'polished this film', Error Type: Accuracy/Mistranslation, Severity: Major
+Error Location 2: 'tortuous and brain-burning', Error Type: Accuracy/Mistranslation, Severity: Major</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>
+====================
+{'input_ids': tensor([[    1,   518, 25580, 29962,  3532, 14816, 29903,  6778,    13,  3492,
+           526,   263,  4933, 13962, 16705,  1904, 29892,  8688,   304, 12534,
+          3149,  1059, 14354, 29892, 12439,  1059,  4072, 29892,   322, 24809,
+          1009,  2775,   537,   297,  5578,   800, 29889,    13, 29966,   829,
+         14816, 29903,  6778,    13,    13,  3492,   526,  6161,  1218,   263,
+         10013, 29899,   517, 29899, 24636,  6189, 13962,  3414, 29889,   450,
+          2752,   338,   525, 31221, 30746, 30858, 30214, 31141, 30467, 31014,
+         31260, 30724, 30505, 30956, 30909, 30374, 30967, 30257,   232,   180,
+           194, 30329, 30210, 31709,   234,   178,   156,   233,   188,   193,
+           233,   166,   131,   234,   153,   174, 30275, 30869,   236,   156,
+           135, 31830, 31914, 30886,   236,   157,   151,   234,   169,   190,
+           233,   166,   131,   234,   153,   174, 30872,   233,   153,   192,
+         30214,   236,   165,   135, 31466, 30682, 30505, 29929, 30534,   232,
+           189,   152, 30658, 31302,   231,   193,   158,   236,   165,   160,
+         31066, 29955, 29900, 29900,   232,   168,   154,   236,   157,   151,
+           234,   169,   190, 31975, 30267,  4286,   450,  1904,  5759, 13962,
+           338,   525,  3868,  1497,   393,   278,   317,  1718,  5874,   338,
+          3386,   292,   385, 11695,   362,   322, 20089, 20578, 24454,  2978,
+           278,   678,  2679,   476,  1251,   399,   273,   751,   279, 20578,
+          7817,   297, 10523,   728,   273, 29892,  1570, 19833,  3842, 29892,
+           322,   338,  3806,   304,  3867, 29871, 29955, 29900, 29900,  5684,
+         11695,   362, 19600,   491,   278,  1095,   310,  3839, 29889,  4286,
+          3529, 12439,   599,  4436,   297,   278, 13962, 29892,   701,   304,
+           263,  7472,   310,  5320, 29889,  1152,  1269,  1059, 29892,  3113,
+          2367,   592,   278,  6590,  1059,  4423, 29892,  1059,  1134,   322,
+          4655, 29914,  1195,   272,  3858,   363,  1269,  1059, 29889, 11019,
+          4436,   508,  1970,  1509,   470,  3984,   280,   328,   278,  9591,
+          2861,   304,  7282,  1735,   297,  6593, 29892,  1550,  9461,  4436,
+          1016, 29915, 29873,  3275,   304,  6410,   310,  6593,   541,   674,
+           367, 10548, 29889,   518, 29914, 25580, 29962,  3575,  4103, 18411,
+          3743, 29871, 29946,  4436, 29901,    13,  2392, 17015, 29871, 29896,
+         29901,   525,   275, 22671,   322, 20089, 20578, 24454,   742,  4829,
+          5167, 29901, 11814,   262,  3002, 29914,   797,   932,  6649,   403,
+           363,  3030, 29892, 14621,   537, 29901, 11019,    13,  2392, 17015,
+         29871, 29906, 29901,   525,  1451,  2679,   476,  1251,   399,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29941, 29901,   525, 29911, 29874,   728,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29946, 29901,   525,   275, 22671,   742,  4829,
+          5167, 29901, 22135, 29914, 29909, 29893, 29895,  1328, 29892, 14621,
+           537, 29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'labels': tensor([[ -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  4103, 18411,
+          3743, 29871, 29946,  4436, 29901,    13,  2392, 17015, 29871, 29896,
+         29901,   525,   275, 22671,   322, 20089, 20578, 24454,   742,  4829,
+          5167, 29901, 11814,   262,  3002, 29914,   797,   932,  6649,   403,
+           363,  3030, 29892, 14621,   537, 29901, 11019,    13,  2392, 17015,
+         29871, 29906, 29901,   525,  1451,  2679,   476,  1251,   399,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29941, 29901,   525, 29911, 29874,   728,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29946, 29901,   525,   275, 22671,   742,  4829,
+          5167, 29901, 22135, 29914, 29909, 29893, 29895,  1328, 29892, 14621,
+           537, 29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'attention_mask': tensor([[ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False]])}
+<s> [INST] <<SYS>>
+You are a machine translation feedback model, designed to pinpoint error locations, identify error types, and assess their severity in translations.
+<</SYS>>
+
+You are evaluating a Chinese-to-English Machine translation task. The source is '他表示，特区政府正在位于新界大屿山的竹篙湾检疫中心附近兴建隔离检疫设施，预计可在9月底前提供额外700套隔离房。'. The model generated translation is 'He said that the SAR government is constructing an isolation and quarantine facility near the Chuk Kho Wan Quarantine Center in Taishan, New Territories, and is expected to provide 700 additional isolation rooms by the end of September.'. Please identify all errors in the translation, up to a maximum of five. For each error, please give me the corresponding error location, error type and major/minor label for each error. Major errors can confuse or mislead the reader due to significant change in meaning, while minor errors don't lead to loss of meaning but will be noticed. [/INST] Your Translation contains 4 errors:
+Error Location 1: 'isolation and quarantine facility', Error Type: Terminology/Inappropriate for context, Severity: Major
+Error Location 2: 'Chuk Kho Wan', Error Type: Terminology/Inappropriate for context, Severity: Major
+Error Location 3: 'Taishan', Error Type: Terminology/Inappropriate for context, Severity: Major
+Error Location 4: 'isolation', Error Type: Style/Awkward, Severity: Major</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>
+====================
+[2024-01-15 22:26:57,173] [INFO] [comm.py:637:init_distributed] cdb=None
+{'input_ids': tensor([[    1,   518, 25580, 29962,  3532, 14816, 29903,  6778,    13,  3492,
+           526,   263,  4933, 13962, 16705,  1904, 29892,  8688,   304, 12534,
+          3149,  1059, 14354, 29892, 12439,  1059,  4072, 29892,   322, 24809,
+          1009,  2775,   537,   297,  5578,   800, 29889,    13, 29966,   829,
+         14816, 29903,  6778,    13,    13,  3492,   526,  6161,  1218,   263,
+         10013, 29899,   517, 29899, 24636,  6189, 13962,  3414, 29889,   450,
+          2752,   338,   525, 31393, 30763, 31389,   232,   145,   137, 30911,
+           235,   134,   143, 31495, 29892, 31043, 30548, 31795,   232,   140,
+           170,   236,   133,   150, 30667,   232,   138,   163, 31412, 31656,
+           234,   166,   171, 29892, 31650,   232,   140,   170, 30993, 31467,
+           233,   141,   155,   234,   134,   170,   235,   135,   148, 30267,
+          4286,   450,  1904,  5759, 13962,   338,   525,  7504,  3278,   304,
+           445, 15839,  3239, 29892,   360,   996,   612, 12323, 29892,   263,
+          1532, 29899,  5203,  4315, 13236, 29892,   756,  1248,  3276,   445,
+          2706,  3196,  3064, 29892,   607,  3732,   278,  6492, 16263, 17269,
+           322, 17294, 29899, 18712,   292, 29889,  4286,  3529, 12439,   599,
+          4436,   297,   278, 13962, 29892,   701,   304,   263,  7472,   310,
+          5320, 29889,  1152,  1269,  1059, 29892,  3113,  2367,   592,   278,
+          6590,  1059,  4423, 29892,  1059,  1134,   322,  4655, 29914,  1195,
+           272,  3858,   363,  1269,  1059, 29889, 11019,  4436,   508,  1970,
+          1509,   470,  3984,   280,   328,   278,  9591,  2861,   304,  7282,
+          1735,   297,  6593, 29892,  1550,  9461,  4436,  1016, 29915, 29873,
+          3275,   304,  6410,   310,  6593,   541,   674,   367, 10548, 29889,
+           518, 29914, 25580, 29962,  3575,  4103, 18411,  3743, 29871, 29906,
+          4436, 29901,    13,  2392, 17015, 29871, 29896, 29901,   525,  3733,
+          3276,   445,  2706,   742,  4829,  5167, 29901,  4831,   332,  4135,
+         29914, 29924,  2132,   550, 18411, 29892, 14621,   537, 29901, 11019,
+            13,  2392, 17015, 29871, 29906, 29901,   525, 29873,   441, 17269,
+           322, 17294, 29899, 18712,   292,   742,  4829,  5167, 29901,  4831,
+           332,  4135, 29914, 29924,  2132,   550, 18411, 29892, 14621,   537,
+         29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'labels': tensor([[ -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  4103, 18411,  3743, 29871, 29906,
+          4436, 29901,    13,  2392, 17015, 29871, 29896, 29901,   525,  3733,
+          3276,   445,  2706,   742,  4829,  5167, 29901,  4831,   332,  4135,
+         29914, 29924,  2132,   550, 18411, 29892, 14621,   537, 29901, 11019,
+            13,  2392, 17015, 29871, 29906, 29901,   525, 29873,   441, 17269,
+           322, 17294, 29899, 18712,   292,   742,  4829,  5167, 29901,  4831,
+           332,  4135, 29914, 29924,  2132,   550, 18411, 29892, 14621,   537,
+         29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'attention_mask': tensor([[ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False]])}
+<s> [INST] <<SYS>>
+You are a machine translation feedback model, designed to pinpoint error locations, identify error types, and assess their severity in translations.
+<</SYS>>
+
+You are evaluating a Chinese-to-English Machine translation task. The source is '根据此历史背景,知名编剧邓原几经打磨,令剧情曲折烧脑。'. The model generated translation is 'According to this historical background, Deng Yuan, a well-known screenwriter, has polished this film several times, which makes the plot tortuous and brain-burning.'. Please identify all errors in the translation, up to a maximum of five. For each error, please give me the corresponding error location, error type and major/minor label for each error. Major errors can confuse or mislead the reader due to significant change in meaning, while minor errors don't lead to loss of meaning but will be noticed. [/INST] Your Translation contains 2 errors:
+Error Location 1: 'polished this film', Error Type: Accuracy/Mistranslation, Severity: Major
+Error Location 2: 'tortuous and brain-burning', Error Type: Accuracy/Mistranslation, Severity: Major</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>
+====================
+{'input_ids': tensor([[    1,   518, 25580, 29962,  3532, 14816, 29903,  6778,    13,  3492,
+           526,   263,  4933, 13962, 16705,  1904, 29892,  8688,   304, 12534,
+          3149,  1059, 14354, 29892, 12439,  1059,  4072, 29892,   322, 24809,
+          1009,  2775,   537,   297,  5578,   800, 29889,    13, 29966,   829,
+         14816, 29903,  6778,    13,    13,  3492,   526,  6161,  1218,   263,
+         10013, 29899,   517, 29899, 24636,  6189, 13962,  3414, 29889,   450,
+          2752,   338,   525, 31221, 30746, 30858, 30214, 31141, 30467, 31014,
+         31260, 30724, 30505, 30956, 30909, 30374, 30967, 30257,   232,   180,
+           194, 30329, 30210, 31709,   234,   178,   156,   233,   188,   193,
+           233,   166,   131,   234,   153,   174, 30275, 30869,   236,   156,
+           135, 31830, 31914, 30886,   236,   157,   151,   234,   169,   190,
+           233,   166,   131,   234,   153,   174, 30872,   233,   153,   192,
+         30214,   236,   165,   135, 31466, 30682, 30505, 29929, 30534,   232,
+           189,   152, 30658, 31302,   231,   193,   158,   236,   165,   160,
+         31066, 29955, 29900, 29900,   232,   168,   154,   236,   157,   151,
+           234,   169,   190, 31975, 30267,  4286,   450,  1904,  5759, 13962,
+           338,   525,  3868,  1497,   393,   278,   317,  1718,  5874,   338,
+          3386,   292,   385, 11695,   362,   322, 20089, 20578, 24454,  2978,
+           278,   678,  2679,   476,  1251,   399,   273,   751,   279, 20578,
+          7817,   297, 10523,   728,   273, 29892,  1570, 19833,  3842, 29892,
+           322,   338,  3806,   304,  3867, 29871, 29955, 29900, 29900,  5684,
+         11695,   362, 19600,   491,   278,  1095,   310,  3839, 29889,  4286,
+          3529, 12439,   599,  4436,   297,   278, 13962, 29892,   701,   304,
+           263,  7472,   310,  5320, 29889,  1152,  1269,  1059, 29892,  3113,
+          2367,   592,   278,  6590,  1059,  4423, 29892,  1059,  1134,   322,
+          4655, 29914,  1195,   272,  3858,   363,  1269,  1059, 29889, 11019,
+          4436,   508,  1970,  1509,   470,  3984,   280,   328,   278,  9591,
+          2861,   304,  7282,  1735,   297,  6593, 29892,  1550,  9461,  4436,
+          1016, 29915, 29873,  3275,   304,  6410,   310,  6593,   541,   674,
+           367, 10548, 29889,   518, 29914, 25580, 29962,  3575,  4103, 18411,
+          3743, 29871, 29946,  4436, 29901,    13,  2392, 17015, 29871, 29896,
+         29901,   525,   275, 22671,   322, 20089, 20578, 24454,   742,  4829,
+          5167, 29901, 11814,   262,  3002, 29914,   797,   932,  6649,   403,
+           363,  3030, 29892, 14621,   537, 29901, 11019,    13,  2392, 17015,
+         29871, 29906, 29901,   525,  1451,  2679,   476,  1251,   399,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29941, 29901,   525, 29911, 29874,   728,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29946, 29901,   525,   275, 22671,   742,  4829,
+          5167, 29901, 22135, 29914, 29909, 29893, 29895,  1328, 29892, 14621,
+           537, 29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'labels': tensor([[ -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  4103, 18411,
+          3743, 29871, 29946,  4436, 29901,    13,  2392, 17015, 29871, 29896,
+         29901,   525,   275, 22671,   322, 20089, 20578, 24454,   742,  4829,
+          5167, 29901, 11814,   262,  3002, 29914,   797,   932,  6649,   403,
+           363,  3030, 29892, 14621,   537, 29901, 11019,    13,  2392, 17015,
+         29871, 29906, 29901,   525,  1451,  2679,   476,  1251,   399,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29941, 29901,   525, 29911, 29874,   728,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29946, 29901,   525,   275, 22671,   742,  4829,
+          5167, 29901, 22135, 29914, 29909, 29893, 29895,  1328, 29892, 14621,
+           537, 29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'attention_mask': tensor([[ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False]])}
+<s> [INST] <<SYS>>
+You are a machine translation feedback model, designed to pinpoint error locations, identify error types, and assess their severity in translations.
+<</SYS>>
+
+You are evaluating a Chinese-to-English Machine translation task. The source is '他表示，特区政府正在位于新界大屿山的竹篙湾检疫中心附近兴建隔离检疫设施，预计可在9月底前提供额外700套隔离房。'. The model generated translation is 'He said that the SAR government is constructing an isolation and quarantine facility near the Chuk Kho Wan Quarantine Center in Taishan, New Territories, and is expected to provide 700 additional isolation rooms by the end of September.'. Please identify all errors in the translation, up to a maximum of five. For each error, please give me the corresponding error location, error type and major/minor label for each error. Major errors can confuse or mislead the reader due to significant change in meaning, while minor errors don't lead to loss of meaning but will be noticed. [/INST] Your Translation contains 4 errors:
+Error Location 1: 'isolation and quarantine facility', Error Type: Terminology/Inappropriate for context, Severity: Major
+Error Location 2: 'Chuk Kho Wan', Error Type: Terminology/Inappropriate for context, Severity: Major
+Error Location 3: 'Taishan', Error Type: Terminology/Inappropriate for context, Severity: Major
+Error Location 4: 'isolation', Error Type: Style/Awkward, Severity: Major</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>
+====================
+[2024-01-15 22:26:57,660] [INFO] [comm.py:637:init_distributed] cdb=None
+[2024-01-15 22:26:57,660] [INFO] [comm.py:668:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+{'input_ids': tensor([[    1,   518, 25580, 29962,  3532, 14816, 29903,  6778,    13,  3492,
+           526,   263,  4933, 13962, 16705,  1904, 29892,  8688,   304, 12534,
+          3149,  1059, 14354, 29892, 12439,  1059,  4072, 29892,   322, 24809,
+          1009,  2775,   537,   297,  5578,   800, 29889,    13, 29966,   829,
+         14816, 29903,  6778,    13,    13,  3492,   526,  6161,  1218,   263,
+         10013, 29899,   517, 29899, 24636,  6189, 13962,  3414, 29889,   450,
+          2752,   338,   525, 31393, 30763, 31389,   232,   145,   137, 30911,
+           235,   134,   143, 31495, 29892, 31043, 30548, 31795,   232,   140,
+           170,   236,   133,   150, 30667,   232,   138,   163, 31412, 31656,
+           234,   166,   171, 29892, 31650,   232,   140,   170, 30993, 31467,
+           233,   141,   155,   234,   134,   170,   235,   135,   148, 30267,
+          4286,   450,  1904,  5759, 13962,   338,   525,  7504,  3278,   304,
+           445, 15839,  3239, 29892,   360,   996,   612, 12323, 29892,   263,
+          1532, 29899,  5203,  4315, 13236, 29892,   756,  1248,  3276,   445,
+          2706,  3196,  3064, 29892,   607,  3732,   278,  6492, 16263, 17269,
+           322, 17294, 29899, 18712,   292, 29889,  4286,  3529, 12439,   599,
+          4436,   297,   278, 13962, 29892,   701,   304,   263,  7472,   310,
+          5320, 29889,  1152,  1269,  1059, 29892,  3113,  2367,   592,   278,
+          6590,  1059,  4423, 29892,  1059,  1134,   322,  4655, 29914,  1195,
+           272,  3858,   363,  1269,  1059, 29889, 11019,  4436,   508,  1970,
+          1509,   470,  3984,   280,   328,   278,  9591,  2861,   304,  7282,
+          1735,   297,  6593, 29892,  1550,  9461,  4436,  1016, 29915, 29873,
+          3275,   304,  6410,   310,  6593,   541,   674,   367, 10548, 29889,
+           518, 29914, 25580, 29962,  3575,  4103, 18411,  3743, 29871, 29906,
+          4436, 29901,    13,  2392, 17015, 29871, 29896, 29901,   525,  3733,
+          3276,   445,  2706,   742,  4829,  5167, 29901,  4831,   332,  4135,
+         29914, 29924,  2132,   550, 18411, 29892, 14621,   537, 29901, 11019,
+            13,  2392, 17015, 29871, 29906, 29901,   525, 29873,   441, 17269,
+           322, 17294, 29899, 18712,   292,   742,  4829,  5167, 29901,  4831,
+           332,  4135, 29914, 29924,  2132,   550, 18411, 29892, 14621,   537,
+         29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'labels': tensor([[ -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  4103, 18411,  3743, 29871, 29906,
+          4436, 29901,    13,  2392, 17015, 29871, 29896, 29901,   525,  3733,
+          3276,   445,  2706,   742,  4829,  5167, 29901,  4831,   332,  4135,
+         29914, 29924,  2132,   550, 18411, 29892, 14621,   537, 29901, 11019,
+            13,  2392, 17015, 29871, 29906, 29901,   525, 29873,   441, 17269,
+           322, 17294, 29899, 18712,   292,   742,  4829,  5167, 29901,  4831,
+           332,  4135, 29914, 29924,  2132,   550, 18411, 29892, 14621,   537,
+         29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'attention_mask': tensor([[ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False]])}
+<s> [INST] <<SYS>>
+You are a machine translation feedback model, designed to pinpoint error locations, identify error types, and assess their severity in translations.
+<</SYS>>
+
+You are evaluating a Chinese-to-English Machine translation task. The source is '根据此历史背景,知名编剧邓原几经打磨,令剧情曲折烧脑。'. The model generated translation is 'According to this historical background, Deng Yuan, a well-known screenwriter, has polished this film several times, which makes the plot tortuous and brain-burning.'. Please identify all errors in the translation, up to a maximum of five. For each error, please give me the corresponding error location, error type and major/minor label for each error. Major errors can confuse or mislead the reader due to significant change in meaning, while minor errors don't lead to loss of meaning but will be noticed. [/INST] Your Translation contains 2 errors:
+Error Location 1: 'polished this film', Error Type: Accuracy/Mistranslation, Severity: Major
+Error Location 2: 'tortuous and brain-burning', Error Type: Accuracy/Mistranslation, Severity: Major</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>
+====================
+{'input_ids': tensor([[    1,   518, 25580, 29962,  3532, 14816, 29903,  6778,    13,  3492,
+           526,   263,  4933, 13962, 16705,  1904, 29892,  8688,   304, 12534,
+          3149,  1059, 14354, 29892, 12439,  1059,  4072, 29892,   322, 24809,
+          1009,  2775,   537,   297,  5578,   800, 29889,    13, 29966,   829,
+         14816, 29903,  6778,    13,    13,  3492,   526,  6161,  1218,   263,
+         10013, 29899,   517, 29899, 24636,  6189, 13962,  3414, 29889,   450,
+          2752,   338,   525, 31221, 30746, 30858, 30214, 31141, 30467, 31014,
+         31260, 30724, 30505, 30956, 30909, 30374, 30967, 30257,   232,   180,
+           194, 30329, 30210, 31709,   234,   178,   156,   233,   188,   193,
+           233,   166,   131,   234,   153,   174, 30275, 30869,   236,   156,
+           135, 31830, 31914, 30886,   236,   157,   151,   234,   169,   190,
+           233,   166,   131,   234,   153,   174, 30872,   233,   153,   192,
+         30214,   236,   165,   135, 31466, 30682, 30505, 29929, 30534,   232,
+           189,   152, 30658, 31302,   231,   193,   158,   236,   165,   160,
+         31066, 29955, 29900, 29900,   232,   168,   154,   236,   157,   151,
+           234,   169,   190, 31975, 30267,  4286,   450,  1904,  5759, 13962,
+           338,   525,  3868,  1497,   393,   278,   317,  1718,  5874,   338,
+          3386,   292,   385, 11695,   362,   322, 20089, 20578, 24454,  2978,
+           278,   678,  2679,   476,  1251,   399,   273,   751,   279, 20578,
+          7817,   297, 10523,   728,   273, 29892,  1570, 19833,  3842, 29892,
+           322,   338,  3806,   304,  3867, 29871, 29955, 29900, 29900,  5684,
+         11695,   362, 19600,   491,   278,  1095,   310,  3839, 29889,  4286,
+          3529, 12439,   599,  4436,   297,   278, 13962, 29892,   701,   304,
+           263,  7472,   310,  5320, 29889,  1152,  1269,  1059, 29892,  3113,
+          2367,   592,   278,  6590,  1059,  4423, 29892,  1059,  1134,   322,
+          4655, 29914,  1195,   272,  3858,   363,  1269,  1059, 29889, 11019,
+          4436,   508,  1970,  1509,   470,  3984,   280,   328,   278,  9591,
+          2861,   304,  7282,  1735,   297,  6593, 29892,  1550,  9461,  4436,
+          1016, 29915, 29873,  3275,   304,  6410,   310,  6593,   541,   674,
+           367, 10548, 29889,   518, 29914, 25580, 29962,  3575,  4103, 18411,
+          3743, 29871, 29946,  4436, 29901,    13,  2392, 17015, 29871, 29896,
+         29901,   525,   275, 22671,   322, 20089, 20578, 24454,   742,  4829,
+          5167, 29901, 11814,   262,  3002, 29914,   797,   932,  6649,   403,
+           363,  3030, 29892, 14621,   537, 29901, 11019,    13,  2392, 17015,
+         29871, 29906, 29901,   525,  1451,  2679,   476,  1251,   399,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29941, 29901,   525, 29911, 29874,   728,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29946, 29901,   525,   275, 22671,   742,  4829,
+          5167, 29901, 22135, 29914, 29909, 29893, 29895,  1328, 29892, 14621,
+           537, 29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'labels': tensor([[ -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+          -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  4103, 18411,
+          3743, 29871, 29946,  4436, 29901,    13,  2392, 17015, 29871, 29896,
+         29901,   525,   275, 22671,   322, 20089, 20578, 24454,   742,  4829,
+          5167, 29901, 11814,   262,  3002, 29914,   797,   932,  6649,   403,
+           363,  3030, 29892, 14621,   537, 29901, 11019,    13,  2392, 17015,
+         29871, 29906, 29901,   525,  1451,  2679,   476,  1251,   399,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29941, 29901,   525, 29911, 29874,   728,   273,
+           742,  4829,  5167, 29901, 11814,   262,  3002, 29914,   797,   932,
+          6649,   403,   363,  3030, 29892, 14621,   537, 29901, 11019,    13,
+          2392, 17015, 29871, 29946, 29901,   525,   275, 22671,   742,  4829,
+          5167, 29901, 22135, 29914, 29909, 29893, 29895,  1328, 29892, 14621,
+           537, 29901, 11019,     2, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000,
+         32000, 32000]]), 'attention_mask': tensor([[ True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True,  True,  True,  True,  True,  True,  True,
+          True,  True,  True,  True, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False, False, False, False, False, False, False, False, False,
+         False, False]])}
+<s> [INST] <<SYS>>
+You are a machine translation feedback model, designed to pinpoint error locations, identify error types, and assess their severity in translations.
+<</SYS>>
+
+You are evaluating a Chinese-to-English Machine translation task. The source is '他表示，特区政府正在位于新界大屿山的竹篙湾检疫中心附近兴建隔离检疫设施，预计可在9月底前提供额外700套隔离房。'. The model generated translation is 'He said that the SAR government is constructing an isolation and quarantine facility near the Chuk Kho Wan Quarantine Center in Taishan, New Territories, and is expected to provide 700 additional isolation rooms by the end of September.'. Please identify all errors in the translation, up to a maximum of five. For each error, please give me the corresponding error location, error type and major/minor label for each error. Major errors can confuse or mislead the reader due to significant change in meaning, while minor errors don't lead to loss of meaning but will be noticed. [/INST] Your Translation contains 4 errors:
+Error Location 1: 'isolation and quarantine facility', Error Type: Terminology/Inappropriate for context, Severity: Major
+Error Location 2: 'Chuk Kho Wan', Error Type: Terminology/Inappropriate for context, Severity: Major
+Error Location 3: 'Taishan', Error Type: Terminology/Inappropriate for context, Severity: Major
+Error Location 4: 'isolation', Error Type: Style/Awkward, Severity: Major</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>
+====================
+[2024-01-15 22:26:57,909] [INFO] [comm.py:637:init_distributed] cdb=None
 Start the trainer
 Start the trainer
 Start the trainer
 Start the trainer
-Start the trainer
-[2024-01-14 23:47:47,219] [WARNING] [cpu_adam.py:84:__init__] FP16 params for CPUAdam may not work on AMD CPUs
-[2024-01-14 23:47:47,243] [WARNING] [cpu_adam.py:84:__init__] FP16 params for CPUAdam may not work on AMD CPUs
-[2024-01-14 23:47:47,258] [WARNING] [cpu_adam.py:84:__init__] FP16 params for CPUAdam may not work on AMD CPUs
-[2024-01-14 23:47:47,264] [WARNING] [cpu_adam.py:84:__init__] FP16 params for CPUAdam may not work on AMD CPUs
-[2024-01-14 23:47:47,266] [WARNING] [cpu_adam.py:84:__init__] FP16 params for CPUAdam may not work on AMD CPUs
-Installed CUDA version 12.3 does not match the version torch was compiled with 12.1 but since the APIs are compatible, accepting this combination
-Installed CUDA version 12.3 does not match the version torch was compiled with 12.1 but since the APIs are compatible, accepting this combination
-Installed CUDA version 12.3 does not match the version torch was compiled with 12.1 but since the APIs are compatible, accepting this combination
-Installed CUDA version 12.3 does not match the version torch was compiled with 12.1 but since the APIs are compatible, accepting this combination
 ninja: no work to do.
-Time to load cpu_adam op: 2.40950083732605 seconds
-Installed CUDA version 12.3 does not match the version torch was compiled with 12.1 but since the APIs are compatible, accepting this combination
-ninja: no work to do.
-Time to load cpu_adam op: 2.4580636024475098 seconds
-Time to load cpu_adam op: 2.5401082038879395 seconds
-Time to load cpu_adam op: 2.5458309650421143 seconds
-Time to load cpu_adam op: 2.546367645263672 seconds
+Time to load cpu_adam op: 0.4484395980834961 seconds
+Time to load cpu_adam op: 0.47026705741882324 seconds
+Time to load cpu_adam op: 0.4703254699707031 seconds
+Time to load cpu_adam op: 0.5246849060058594 seconds
 Parameter Offload: Total persistent parameters: 266240 in 65 params
-{'loss': 12.8177, 'learning_rate': 1e-05, 'epoch': 0.02}
-{'loss': 12.88, 'learning_rate': 1e-05, 'epoch': 0.04}
-{'loss': 12.9155, 'learning_rate': 1e-05, 'epoch': 0.05}
-{'loss': 12.9047, 'learning_rate': 1e-05, 'epoch': 0.07}
-{'loss': 12.7993, 'learning_rate': 1e-05, 'epoch': 0.09}
-{'loss': 12.8614, 'learning_rate': 1e-05, 'epoch': 0.11}
-{'loss': 12.9023, 'learning_rate': 1e-05, 'epoch': 0.12}
-{'loss': 12.8244, 'learning_rate': 1e-05, 'epoch': 0.14}
-{'loss': 12.8563, 'learning_rate': 1e-05, 'epoch': 0.16}
-{'loss': 12.8528, 'learning_rate': 1e-05, 'epoch': 0.18}
-{'loss': 12.8093, 'learning_rate': 1e-05, 'epoch': 0.19}
-{'loss': 12.8565, 'learning_rate': 1e-05, 'epoch': 0.21}
-{'loss': 12.8511, 'learning_rate': 1e-05, 'epoch': 0.23}
-{'loss': 12.7682, 'learning_rate': 1e-05, 'epoch': 0.25}
-{'loss': 12.8836, 'learning_rate': 1e-05, 'epoch': 0.26}
-{'loss': 12.8484, 'learning_rate': 1e-05, 'epoch': 0.28}
-{'loss': 12.8352, 'learning_rate': 1e-05, 'epoch': 0.3}
-{'loss': 12.7717, 'learning_rate': 1e-05, 'epoch': 0.32}
-{'loss': 12.8667, 'learning_rate': 1e-05, 'epoch': 0.33}
-{'loss': 12.802, 'learning_rate': 1e-05, 'epoch': 0.35}
-{'loss': 12.853, 'learning_rate': 1e-05, 'epoch': 0.37}
-{'loss': 12.8439, 'learning_rate': 1e-05, 'epoch': 0.39}
-{'loss': 12.8511, 'learning_rate': 9.992407582166582e-06, 'epoch': 0.4}
-{'loss': 10.8127, 'learning_rate': 9.969653386589749e-06, 'epoch': 0.42}
-{'loss': 14.6894, 'learning_rate': 9.969653386589749e-06, 'epoch': 0.44}
-{'loss': 13.519, 'learning_rate': 9.969653386589749e-06, 'epoch': 0.46}
-{'loss': 15.9483, 'learning_rate': 9.969653386589749e-06, 'epoch': 0.47}
-{'loss': 14.861, 'learning_rate': 9.969653386589749e-06, 'epoch': 0.49}
-{'loss': 15.3356, 'learning_rate': 9.969653386589749e-06, 'epoch': 0.51}
-{'loss': 18.2284, 'learning_rate': 9.969653386589749e-06, 'epoch': 0.53}
-{'loss': 12.1342, 'learning_rate': 9.969653386589749e-06, 'epoch': 0.54}
-{'loss': 19.7609, 'learning_rate': 9.969653386589749e-06, 'epoch': 0.56}
-{'loss': 20.087, 'learning_rate': 9.969653386589749e-06, 'epoch': 0.58}
-{'loss': 11.8466, 'learning_rate': 9.969653386589749e-06, 'epoch': 0.6}
-{'loss': 24.0047, 'learning_rate': 9.969653386589749e-06, 'epoch': 0.61}
-[2024-01-15 01:51:55,044] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 182644
-[2024-01-15 01:52:12,347] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 182645
-[2024-01-15 01:52:12,387] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 182646
-[2024-01-15 01:52:12,419] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 182647
-[2024-01-15 01:52:12,419] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 182648
-[2024-01-15 01:52:12,449] [ERROR] [launch.py:321:sigkill_handler] ['/home/guangleizhu/miniconda3/envs/torch2.1/bin/python', '-u', 'finetune_llama.py', '--local_rank=4'] exits with return code = 1
+{'loss': 11.1345, 'learning_rate': 1e-05, 'epoch': 0.02}
+{'loss': 12.3104, 'learning_rate': 1e-05, 'epoch': 0.04}
+{'loss': 12.1494, 'learning_rate': 1e-05, 'epoch': 0.06}
+{'loss': 18.4, 'learning_rate': 1e-05, 'epoch': 0.07}
+{'loss': 10.8314, 'learning_rate': 1e-05, 'epoch': 0.09}
+{'loss': 12.0618, 'learning_rate': 1e-05, 'epoch': 0.11}
+{'loss': 16.1885, 'learning_rate': 1e-05, 'epoch': 0.13}
+{'loss': 12.0521, 'learning_rate': 9.991218658821609e-06, 'epoch': 0.15}
+{'loss': 11.7473, 'learning_rate': 9.964905480067585e-06, 'epoch': 0.17}
+{'loss': 500116.3438, 'learning_rate': 9.964905480067585e-06, 'epoch': 0.19}
+{'loss': 4098.2427, 'learning_rate': 9.964905480067585e-06, 'epoch': 0.21}
+{'loss': 7095914.0, 'learning_rate': 9.964905480067585e-06, 'epoch': 0.22}
+{'loss': 9706042.0, 'learning_rate': 9.964905480067585e-06, 'epoch': 0.24}
+{'loss': 1975873.625, 'learning_rate': 9.964905480067585e-06, 'epoch': 0.26}
+{'loss': 412744.0625, 'learning_rate': 9.964905480067585e-06, 'epoch': 0.28}
+{'loss': 6272.7256, 'learning_rate': 9.964905480067585e-06, 'epoch': 0.3}
+{'loss': 1230242.5, 'learning_rate': 9.964905480067585e-06, 'epoch': 0.32}
+{'loss': 7394444.5, 'learning_rate': 9.964905480067585e-06, 'epoch': 0.34}

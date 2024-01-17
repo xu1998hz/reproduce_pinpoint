@@ -13,7 +13,7 @@
 source ~/.bashrc
 # module purge
 eval "$(conda shell.bash hook)"
-conda activate torch2.1
+conda activate ds
 
 nvidia-smi
 
@@ -25,7 +25,8 @@ nvidia-smi
 # - username should be replaced by your username
 # - path-to-directory should be replaced by the path to your directory where the executable is
 
-cd /home/guangleizhu/reproduce_pinpoint/finetune
+# cd /home/guangleizhu/reproduce_pinpoint/finetune
+cd /ocean/projects/cis230075p/gzhu/reproduce_pinpoint/finetune
 
-# CUDA_VISIBLE_DEVICES=4,5,7 deepspeed  --include localhost:4,5,7 finetune_llama.py
-deepspeed --include localhost:0,1,4,5,7 finetune_llama.py
+# deepspeed --include localhost:0,1,4,5,7 finetune_llama.py
+deepspeed --num_gpus 4 finetune_llama.py
