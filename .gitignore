@@ -3,5 +3,6 @@ out/data
 save/
 slurm_out/
 finetune/wandb
+qlora/wandb
 # pycache
 __pycache__/

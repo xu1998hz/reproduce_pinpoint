@@ -25,12 +25,7 @@ import random
 from trl import SFTTrainer
 
 
-print('!')
-
-
-tqdm.pandas()
 IGNORE_INDEX = -100
-
 
 # Define and parse arguments.
 @dataclass
@@ -46,7 +41,7 @@ class ScriptArguments:
     dataset_text_field: Optional[str] = field(default="text", metadata={"help": "the text field of the dataset"})
     log_with: Optional[str] = field(default="none", metadata={"help": "use 'wandb' to log with wandb"})
     # learning_rate: Optional[float] = field(default=1.41e-5, metadata={"help": "the learning rate"})
-    learning_rate: Optional[float] = field(default=1e-5, metadata={"help": "the learning rate"})
+    learning_rate: Optional[float] = field(default=1e-6, metadata={"help": "the learning rate"})
     batch_size: Optional[int] = field(default=32, metadata={"help": "the batch size"})
     seq_length: Optional[int] = field(default=1024, metadata={"help": "Input sequence length"})
     gradient_accumulation_steps: Optional[int] = field(
@@ -63,7 +58,7 @@ class ScriptArguments:
     flash_atten: Optional[bool] = field(default=False, metadata={"help": "use flash attention or not"}) 
     logging_steps: Optional[int] = field(default=1, metadata={"help": "the number of logging steps"})
     # hf_token: Optional[bool] = field(default=True, metadata={"help": "Use HF auth token to access the model"})
-    num_train_epochs: Optional[int] = field(default=5, metadata={"help": "the number of training epochs"})
+    num_train_epochs: Optional[int] = field(default=3, metadata={"help": "the number of training epochs"})
     max_steps: Optional[int] = field(default=-1, metadata={"help": "the number of training steps"})
     save_steps: Optional[int] = field(
         default=100, metadata={"help": "Number of updates steps before two checkpoint saves"}
@@ -123,26 +118,28 @@ def smart_tokenizer_and_embedding_resize(
     num_new_tokens = tokenizer.add_special_tokens(special_tokens_dict)
     model.resize_token_embeddings(len(tokenizer))
 
-    if num_new_tokens > -1:
+    if num_new_tokens > 0:
+        print(f'num new token added: {num_new_tokens}')
         input_embeddings = model.get_input_embeddings().weight.data
         output_embeddings = model.get_output_embeddings().weight.data
 
+        # NOTE: dim should be 1 instead of -1?
         input_embeddings_avg = input_embeddings[:-num_new_tokens].mean(
-            dim=-1, keepdim=True
+            dim=0, keepdim=True
         )
         output_embeddings_avg = output_embeddings[:-num_new_tokens].mean(
-            dim=-1, keepdim=True
+            dim=0, keepdim=True
         )
 
         input_embeddings[-num_new_tokens:] = input_embeddings_avg
         output_embeddings[-num_new_tokens:] = output_embeddings_avg
 
 
-tokenizer = AutoTokenizer.from_pretrained(script_args.model_name, use_fast=True)
+tokenizer = AutoTokenizer.from_pretrained(script_args.model_name, use_fast=False)
 # Create a new token and add it to the tokenizer
-tokenizer.add_special_tokens({"pad_token": "<pad>"})
-# tokenizer.padding_side = 'left'
-# tokenizer.deprecation_warnings["Asking-to-pad-a-fast-tokenizer"] = True # supress warning
+# set pad side to left TODO: double check if this is correct
+tokenizer.padding_side = "left"
+print(f"tokenizer padding side: {tokenizer.padding_side}")
 
 model = AutoModelForCausalLM.from_pretrained(
     script_args.model_name,
@@ -153,27 +150,28 @@ model = AutoModelForCausalLM.from_pretrained(
     # token=script_args.hf_token,
 )
 
-model.resize_token_embeddings(len(tokenizer))
+# tokenizer.add_special_tokens({"pad_token": "<pad>"})
+# model.resize_token_embeddings(len(tokenizer))
 
-# if tokenizer.pad_token is None:
-#     print("add pad token and resize embedding: True")
-#     smart_tokenizer_and_embedding_resize(
-#         special_tokens_dict=
-#         {
-#             "pad_token": "<pad>",
-#         },
-#         tokenizer=tokenizer,
-#         model=model,
-#     )
-# else:
-#     print("add pad token and resize embedding: False")
+if tokenizer.pad_token is None:
+    print("add pad token and resize embedding: True")
+    smart_tokenizer_and_embedding_resize(
+        special_tokens_dict=
+        {
+            "pad_token": "<pad>",
+        },
+        tokenizer=tokenizer,
+        model=model,
+    )
+else:
+    print("add pad token and resize embedding: False")
 
-print("==Model loaded==")
-# print in giga bytes instead of bytes
-print(f"usage {model.get_memory_footprint() / 1024 ** 3} GB")
+# print("==Model loaded==")
+# print(f"usage {model.get_memory_footprint() / 1024 ** 3} GB")
 
 # Step 2: Load the dataset
 # dataset = load_dataset(script_args.dataset_name, split="train")
+# print('using wrong dataset')
 
 server = 'psc'
 if server == 'aries':
@@ -184,7 +182,7 @@ if server == 'aries':
 elif server == 'psc':
     os.environ['TRANSFORMERS_CACHE'] = '/ocean/projects/cis230075p/gzhu/hf_cache'
     os.environ['HF_HOME'] = '/ocean/projects/cis230075p/gzhu/hf_cache'
-    f = "/ocean/projects/cis230075p/gzhu/mqm_newstest2021_zhen_parsed.json"
+    f = "/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/data/mqm_newstest2021_zhen_parsed.json"
     # output_dir = "/ocean/projects/cis230075p/gzhu/ft_out"
 
 extensions = "json"
@@ -303,19 +301,14 @@ data_module = make_supervised_data_module(tokenizer=tokenizer)
 
 print(tokenizer.special_tokens_map)
 # print first few examples
-for _ in range(1):
-    # use datacollator to collate the data
-    i = random.randint(0, len(data_module["train_dataset"]))
-    example = data_module["data_collator"]([data_module["train_dataset"][i]])
-    print(example)
-    # decode
-    print(tokenizer.decode(example["input_ids"][0]))
-
-    # print the input_ids
-    # print(data_module["train_dataset"][1])
-    # decode
-    # print(tokenizer.decode(data_module["train_dataset"][i]["input_ids"]))
-    print('=' * 20)
+# for _ in range(1):
+#     # use datacollator to collate the data
+#     i = random.randint(0, len(data_module["train_dataset"]))
+#     example = data_module["data_collator"]([data_module["train_dataset"][i]])
+#     print(example)
+#     # decode
+#     print(tokenizer.decode(example["input_ids"][0]))
+#     print('=' * 20)
 # exit(0)
 
 
@@ -342,7 +335,6 @@ training_args = TrainingArguments(
 
 # Step 4: Define the LoraConfig
 if script_args.use_peft:
-    print("==Using PEFT==")
     peft_config = LoraConfig(
         r=script_args.peft_lora_r,
         lora_alpha=script_args.peft_lora_alpha,
@@ -351,6 +343,8 @@ if script_args.use_peft:
         bias="none",
         task_type="CAUSAL_LM",
     )
+    print("==Using PEFT==")
+    print(peft_config)
 else:
     peft_config = None
 
@@ -362,6 +356,7 @@ trainer = SFTTrainer(
     tokenizer=tokenizer,
     max_seq_length=script_args.seq_length,
     train_dataset=data_module["train_dataset"],
+    # train_dataset=dataset,
     dataset_text_field=script_args.dataset_text_field,
     peft_config=peft_config,
     packing=True
