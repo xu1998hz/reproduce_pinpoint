@@ -14,7 +14,7 @@ from trl import SFTTrainer
 
 # model = "meta-llama/Llama-2-7b-hf"
 # path = "output/7b"
-path = "/ocean/projects/cis230075p/gzhu/output/checkpoint-300"
+path = "/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/qlora/output/Llama-2-7b-hf_lr_4e-05_eps_5_bs_1_ga32_seq_512_rank_64_alpha_16_dropout_0.05_fp16_True_4bit_True_fa_True"
 device = 'cuda:0'
 
 tokenizer = AutoTokenizer.from_pretrained(path, use_fast=True)
@@ -37,8 +37,10 @@ def generate(instruction):
     outputs = model.generate(
         input_ids, 
         attention_mask=attention_mask, 
-        max_new_tokens=1024, 
-        pad_token_id=tokenizer.eos_token_id)
+        max_new_tokens=128,
+        num_return_sequences=2
+        # pad_token_id=tokenizer.eos_token_id
+    )
     out = tokenizer.decode(outputs[0], skip_special_tokens=True)
     print(out)
 

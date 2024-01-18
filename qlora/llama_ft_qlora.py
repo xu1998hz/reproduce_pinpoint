@@ -26,6 +26,7 @@ from trl import SFTTrainer
 
 
 IGNORE_INDEX = -100
+os.environ["WANDB__SERVICE_WAIT"] = "300"
 
 # Define and parse arguments.
 @dataclass
@@ -40,8 +41,7 @@ class ScriptArguments:
     )
     dataset_text_field: Optional[str] = field(default="text", metadata={"help": "the text field of the dataset"})
     log_with: Optional[str] = field(default="none", metadata={"help": "use 'wandb' to log with wandb"})
-    # learning_rate: Optional[float] = field(default=1.41e-5, metadata={"help": "the learning rate"})
-    learning_rate: Optional[float] = field(default=1e-6, metadata={"help": "the learning rate"})
+    learning_rate: Optional[float] = field(default=1.41e-5, metadata={"help": "the learning rate"})
     batch_size: Optional[int] = field(default=32, metadata={"help": "the batch size"})
     seq_length: Optional[int] = field(default=1024, metadata={"help": "Input sequence length"})
     gradient_accumulation_steps: Optional[int] = field(
@@ -51,19 +51,19 @@ class ScriptArguments:
     load_in_8bit: Optional[bool] = field(default=False, metadata={"help": "load the model in 8 bits precision"})
     load_in_4bit: Optional[bool] = field(default=False, metadata={"help": "load the model in 4 bits precision"})
     use_peft: Optional[bool] = field(default=False, metadata={"help": "Wether to use PEFT or not to train adapters"})
-    # trust_remote_code: Optional[bool] = field(default=False, metadata={"help": "Enable `trust_remote_code`"})
     output_dir: Optional[str] = field(default="output", metadata={"help": "the output directory"})
     peft_lora_r: Optional[int] = field(default=64, metadata={"help": "the r parameter of the LoRA adapters"})
     peft_lora_alpha: Optional[int] = field(default=16, metadata={"help": "the alpha parameter of the LoRA adapters"})
     flash_atten: Optional[bool] = field(default=False, metadata={"help": "use flash attention or not"}) 
     logging_steps: Optional[int] = field(default=1, metadata={"help": "the number of logging steps"})
-    # hf_token: Optional[bool] = field(default=True, metadata={"help": "Use HF auth token to access the model"})
     num_train_epochs: Optional[int] = field(default=3, metadata={"help": "the number of training epochs"})
     max_steps: Optional[int] = field(default=-1, metadata={"help": "the number of training steps"})
     save_steps: Optional[int] = field(
         default=100, metadata={"help": "Number of updates steps before two checkpoint saves"}
     )
     save_total_limit: Optional[int] = field(default=3, metadata={"help": "Limits total number of checkpoints."})
+    # hf_token: Optional[bool] = field(default=True, metadata={"help": "Use HF auth token to access the model"})
+    # trust_remote_code: Optional[bool] = field(default=False, metadata={"help": "Enable `trust_remote_code`"})
     # gradient_checkpointing: Optional[bool] = field(
     #     default=False, metadata={"help": "Whether to use gradient checkpointing or no"}
     # )
@@ -78,6 +78,11 @@ class ScriptArguments:
 
 parser = HfArgumentParser(ScriptArguments)
 script_args = parser.parse_args_into_dataclasses()[0]
+# print all args
+print(script_args)
+
+run_name = f"Llama-2-7b-hf_lr_{script_args.learning_rate}_eps_{script_args.num_train_epochs}_bs_{script_args.batch_size}_ga{script_args.gradient_accumulation_steps}_seq_{script_args.seq_length}_rank_{script_args.peft_lora_r}_alpha_{script_args.peft_lora_alpha}_dropout_{0.05}_fp16_{script_args.use_fp16}_4bit_{script_args.load_in_4bit}_fa_{script_args.flash_atten}"
+print(run_name)
 
 # Step 1: Load the model
 if script_args.load_in_8bit and script_args.load_in_4bit:
@@ -137,7 +142,7 @@ def smart_tokenizer_and_embedding_resize(
 
 tokenizer = AutoTokenizer.from_pretrained(script_args.model_name, use_fast=False)
 # Create a new token and add it to the tokenizer
-# set pad side to left TODO: double check if this is correct
+# set pad side to right
 tokenizer.padding_side = "left"
 print(f"tokenizer padding side: {tokenizer.padding_side}")
 
@@ -280,7 +285,7 @@ def _tokenize_fn(
             text,
             return_tensors="pt",
             padding="max_length",
-            max_length=512,
+            max_length=script_args.seq_length,
             truncation=True,
         )
         for text in strings
@@ -301,16 +306,23 @@ data_module = make_supervised_data_module(tokenizer=tokenizer)
 
 print(tokenizer.special_tokens_map)
 # print first few examples
-# for _ in range(1):
-#     # use datacollator to collate the data
-#     i = random.randint(0, len(data_module["train_dataset"]))
-#     example = data_module["data_collator"]([data_module["train_dataset"][i]])
-#     print(example)
-#     # decode
-#     print(tokenizer.decode(example["input_ids"][0]))
-#     print('=' * 20)
-# exit(0)
+for _ in range(1):
+    # use datacollator to collate the data
+    i = random.randint(0, len(data_module["train_dataset"]))
+    example = data_module["data_collator"]([data_module["train_dataset"][i]])
+    # print(example)
+    # decode
+    print(tokenizer.decode(example["input_ids"][0]))
+    print('=' * 20)
 
+# # print the max length of the dataset excluding the padding
+# max_len = 0
+# for i in tqdm(range(len(data_module["train_dataset"]))):
+#     example = data_module["data_collator"]([data_module["train_dataset"][i]])
+#     max_len = max(max_len, example["input_ids"].ne(tokenizer.pad_token_id).sum().item())
+
+# print(f"max length of the dataset: {max_len}")
+# exit()
 
 # Step 3: Define the training arguments
 training_args = TrainingArguments(
@@ -322,6 +334,7 @@ training_args = TrainingArguments(
     num_train_epochs=script_args.num_train_epochs,
     max_steps=script_args.max_steps,
     report_to=script_args.log_with,
+    run_name=run_name,
     save_steps=script_args.save_steps,
     save_total_limit=script_args.save_total_limit,
     # hub_model_id=script_args.hub_model_id,
@@ -367,9 +380,10 @@ with torch.backends.cuda.sdp_kernel(enable_flash=True, enable_math=False, enable
     trainer.train()
 
 # Step 6: Save the model
-trainer.save_model(script_args.output_dir + '/7b')
+# create save name with training args
+trainer.save_model(script_args.output_dir + f'/{run_name}')
 # save the tokenizer
-tokenizer.save_pretrained(script_args.output_dir + '/7b')
+tokenizer.save_pretrained(script_args.output_dir + f'/{run_name}')
 
 
 # model.save_pretrained("output/adapter_test", save_adapter=True, save_config=True)

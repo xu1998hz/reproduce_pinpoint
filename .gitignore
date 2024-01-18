@@ -4,5 +4,6 @@ save/
 slurm_out/
 finetune/wandb
 qlora/wandb
+qlora/output
 # pycache
 __pycache__/
