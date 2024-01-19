@@ -45,12 +45,12 @@ def read_tsv_and_convert_to_json(file_path):
 
         # Check if the key is unique and add the data to the JSON dictionary
         if unique_key not in json_data['data']:
-            system_prompt = f"You are a machine translation feedback model, designed to pinpoint error locations, identify error types, and assess their severity in translations."
+            # system_prompt = f"You are a machine translation feedback model, designed to pinpoint error locations, identify error types, and assess their severity in translations."
             input = f"You are evaluating a Chinese-to-English Machine translation task. The source is '{remove_tags(row['source'])}'. The model generated translation is '{remove_tags(row['target'])}'. Please identify all errors in the translation, up to a maximum of five. For each error, please give me the corresponding error location, error type and major/minor label for each error. Major errors can confuse or mislead the reader due to significant change in meaning, while minor errors don't lead to loss of meaning but will be noticed."
-            template = f"[INST] <<SYS>>\n{system_prompt}\n<</SYS>>\n\n{input} [/INST] "
+            # template = f"[INST] <<SYS>>\n{system_prompt}\n<</SYS>>\n\n{input} [/INST] "
             # input = remove_tags(row['source']) + ' ' + remove_tags(row['target'])
             json_data['data'][unique_key] = {
-                'input': template,
+                'input': input,
                 'output': '',
                 'num': 0
             }
@@ -70,9 +70,10 @@ def read_tsv_and_convert_to_json(file_path):
     return json_data
 
 # Example usage
-file_path = '/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/data/mqm_newstest2021_zhen.tsv'
+# file_path = '/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/data/mqm_newstest2021_zhen.tsv'
+file_path = '/home/guangleizhu/reproduce_pinpoint/data/mqm_newstest2021_zhen.tsv'
 json_output = read_tsv_and_convert_to_json(file_path)
 
 # Optionally, write the JSON data to a file
-with open('/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/data/mqm_newstest2021_zhen_parsed.json', 'w', encoding='utf-8') as json_file:
+with open('/home/guangleizhu/reproduce_pinpoint/data/mqm_newstest2021_zhen_parsed.json', 'w', encoding='utf-8') as json_file:
     json.dump(json_output, json_file, ensure_ascii=False, indent=4)
