@@ -310,7 +310,7 @@ for _ in range(1):
     # use datacollator to collate the data
     i = random.randint(0, len(data_module["train_dataset"]))
     example = data_module["data_collator"]([data_module["train_dataset"][i]])
-    # print(example)
+    print(example)
     # decode
     print(tokenizer.decode(example["input_ids"][0]))
     print('=' * 20)
@@ -322,7 +322,7 @@ for _ in range(1):
 #     max_len = max(max_len, example["input_ids"].ne(tokenizer.pad_token_id).sum().item())
 
 # print(f"max length of the dataset: {max_len}")
-# exit()
+exit()
 
 # Step 3: Define the training arguments
 training_args = TrainingArguments(

@@ -26,8 +26,10 @@ DEFAULT_BOS_TOKEN = "</s>"
 DEFAULT_UNK_TOKEN = "</s>"
 max_length = 720
 # f = "data/eval_mt_russian_llama.json"
-f = "/home/guangleizhu/reproduce_pinpoint/data/mqm_newstest2021_zhen_parsed.json"
-output_dir = "/home/guangleizhu/reproduce_pinpoint/finetune/ft_out"
+# f = "/home/guangleizhu/reproduce_pinpoint/data/mqm_newstest2021_zhen_parsed.json"
+f = "/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/data/mqm_newstest2021_zhen_parsed.json"
+# output_dir = "/home/guangleizhu/reproduce_pinpoint/finetune/ft_out"
+output_dir = "/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/finetune/ft_out"
 padding_strategy = "left"
 num_epoch = 5
 

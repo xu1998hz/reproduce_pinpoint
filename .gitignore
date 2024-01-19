@@ -3,6 +3,7 @@ out/data
 save/
 slurm_out/
 finetune/wandb
+finetune/ft_out
 qlora/wandb
 qlora/output
 # pycache
