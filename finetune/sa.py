@@ -1,4 +1,5 @@
 import transformers
+from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 import random
@@ -11,9 +12,6 @@ device = 'cuda:0'
 
 # load the feedback model
 feedback_tokenizer = AutoTokenizer.from_pretrained(path, use_fast=True)
-if feedback_tokenizer.pad_token is None:
-    print('error! ')
-
 feedback_model = AutoModelForCausalLM.from_pretrained(path, device_map=device, torch_dtype=torch.float16)
 
 # load regular mistral 7b instruct model
@@ -21,17 +19,9 @@ base_name = 'mistralai/Mistral-7B-Instruct-v0.2'
 base_tokenizer = AutoTokenizer.from_pretrained(base_name, use_fast=True)
 base_model = AutoModelForCausalLM.from_pretrained(base_name, device_map=device, torch_dtype=torch.float16)
 
-def apply_template(template, input):
-    # FIXME
-    system_prompt, input = '', ''
-    prompt = f"[INST] <<SYS>>\n{system_prompt}\n<</SYS>>\n\n{input} [/INST] "
-    return prompt
 
-
-def generate(input, model, tokenizer, mode, config):
-    assert mode in ['feedback', 'base']
+def feedback_generate(input, model, tokenizer, config):
     model.eval()
-    prompt = apply_template(mode, input)
     batch = tokenizer(prompt, return_tensors='pt', padding=False).to(device)
     input_ids = batch['input_ids'].squeeze(1)
     attention_mask = batch['attention_mask'].squeeze(1)
@@ -42,11 +32,16 @@ def generate(input, model, tokenizer, mode, config):
         max_new_tokens=512, 
         pad_token_id=tokenizer.eos_token_id)
     out = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    # strip out the input part
+
+
     return out
 
-def get_score(src, candidate):
-    # use feedback model to get score
-    return 1
+def get_score(input):
+    # find occurances of 'Severity: Major' and 'Severity: Minor'
+    score = 0
+    # input
+
 
 # init settings
 src = 'abc'
@@ -55,6 +50,17 @@ mt = generate(src, base_model, base_tokenizer, 'greedy')
 temp = 0.9
 n = 4
 decay = 0.1
+
+# load data
+f = '../data/mqm_newstest2021_zhen_parsed.json'
+# TODO: update split later
+raw_dataset = load_dataset(
+    'json',
+    data_files=[f],
+    field='instances',
+    split="train",
+    use_auth_token=None,
+)
 
 for i in range(n):
     input = src + mt

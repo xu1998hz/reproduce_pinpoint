@@ -26,4 +26,4 @@ nvidia-smi
 cd /ocean/projects/cis230075p/gzhu/reproduce_pinpoint/finetune
 
 # deepspeed --include localhost:0,1,4,5,7 finetune_llama.py
-deepspeed --num_gpus 4 test.py
+deepspeed --num_gpus 4 finetune_llama.py
