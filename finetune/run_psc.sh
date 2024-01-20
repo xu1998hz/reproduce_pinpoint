@@ -10,7 +10,9 @@
 source ~/.bashrc
 # module purge
 eval "$(conda shell.bash hook)"
-conda activate torch2.1
+conda activate ds
+
+export PATH=:/home/guangleizhu/.vscode-server/bin/0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2/bin/remote-cli:/home/guangleizhu/miniconda3/envs/ds/bin:/home/guangleizhu/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/guangleizhu/.dotnet/tools
 
 nvidia-smi
 

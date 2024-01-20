@@ -25,10 +25,10 @@ DEFAULT_PAD_TOKEN = "[PAD]"
 DEFAULT_EOS_TOKEN = "</s>"
 DEFAULT_BOS_TOKEN = "</s>"
 DEFAULT_UNK_TOKEN = "</s>"
-max_length = 720
+max_length = 2048
 # f = "data/eval_mt_russian_llama.json"
-# f = "/home/guangleizhu/reproduce_pinpoint/data/mqm_newstest2021_zhen_parsed.json"
-f = "/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/data/mqm_newstest2021_zhen_parsed.json"
+f = "/home/guangleizhu/reproduce_pinpoint/data/mqm_newstest2021_zhen_parsed.json"
+# f = "/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/data/mqm_newstest2021_zhen_parsed.json"
 # output_dir = "/home/guangleizhu/reproduce_pinpoint/finetune/ft_out"
 # load run_name from args
 run_name = 'zh-en'
@@ -180,7 +180,8 @@ raw_dataset = load_dataset(
     use_auth_token=None,
 )
 
-print(raw_dataset)
+print(raw_dataset[:3])
+
 
 model_name = 'baffo32/decapoda-research-llama-7B-hf'
 config = AutoConfig.from_pretrained(model_name)
@@ -209,6 +210,15 @@ tokenizer.add_special_tokens(
 )
 
 data_module = make_supervised_data_module(tokenizer=tokenizer)
+# # print the max length of the input tokens that are not padding
+# c = 0
+# for i in range(len(data_module["train_dataset"])):
+#     j = data_module["train_dataset"][i]["input_ids"].ne(tokenizer.pad_token_id).sum()
+#     if j > 720:
+#         c += 1
+#     # print(f"Input {i}: {data_module['train_dataset'][i]['input_ids'].ne(1).sum()}")
+# print('here is the count', c)
+
 training_args = TrainingArguments(
     output_dir=output_dir,
     evaluation_strategy="no",
