@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -N 1
 #SBATCH -p GPU-shared
-#SBATCH -t 24:00:00
+#SBATCH -t 12:00:00
 #SBATCH --cpus-per-task=20
 #SBATCH --gpus=v100-32:4
 #SBATCH --output=/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/slurm_out/ft_llama.out

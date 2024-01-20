@@ -31,12 +31,9 @@ max_length = 720
 f = "/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/data/mqm_newstest2021_zhen_parsed.json"
 # output_dir = "/home/guangleizhu/reproduce_pinpoint/finetune/ft_out"
 # load run_name from args
-argparser = argparse.ArgumentParser()
-argparser.add_argument('--run_name', type=str, default='zh-en')
-args = argparser.parse_args()
-print(args)
+run_name = 'zh-en'
 
-output_dir = f"/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/finetune/ft_out/{args.run_name}" 
+output_dir = f"/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/finetune/ft_out/{run_name}" 
 padding_strategy = "left"
 num_epoch = 5
 
@@ -226,7 +223,7 @@ training_args = TrainingArguments(
     save_strategy="epoch",
     save_total_limit=5,
     seed=42,
-    run_name=args.run_name,
+    run_name=run_name,
     load_best_model_at_end=False,
     greater_is_better=False,
     deepspeed=ds_config,
