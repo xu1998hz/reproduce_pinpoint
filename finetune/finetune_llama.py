@@ -25,13 +25,14 @@ DEFAULT_PAD_TOKEN = "[PAD]"
 DEFAULT_EOS_TOKEN = "</s>"
 DEFAULT_BOS_TOKEN = "</s>"
 DEFAULT_UNK_TOKEN = "</s>"
-max_length = 2048
+max_length = 720
 # f = "data/eval_mt_russian_llama.json"
-f = "/home/guangleizhu/reproduce_pinpoint/data/mqm_newstest2021_zhen_parsed.json"
-# f = "/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/data/mqm_newstest2021_zhen_parsed.json"
+# f = "/home/guangleizhu/reproduce_pinpoint/data/mqm_newstest2021_ende_parsed.json"
+f = "/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/data/mqm_newstest2021_ende_parsed.json"
 # output_dir = "/home/guangleizhu/reproduce_pinpoint/finetune/ft_out"
 # load run_name from args
-run_name = 'zh-en'
+# run_name = 'zh-en'
+run_name = 'en-de'
 
 output_dir = f"/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/finetune/ft_out/{run_name}" 
 padding_strategy = "left"
@@ -180,7 +181,7 @@ raw_dataset = load_dataset(
     use_auth_token=None,
 )
 
-print(raw_dataset[:3])
+print(raw_dataset[:1])
 
 
 model_name = 'baffo32/decapoda-research-llama-7B-hf'
