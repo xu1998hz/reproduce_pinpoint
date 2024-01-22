@@ -34,7 +34,8 @@ f = "/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/data/mqm_newstest2021_en
 # run_name = 'zh-en'
 run_name = 'en-de'
 
-output_dir = f"/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/finetune/ft_out/{run_name}" 
+# output_dir = f"/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/finetune/ft_out/{run_name}" 
+output_dir = f"/home/guangleizhu/reproduce_pinpoint/finetune/ft_out/{run_name}" 
 padding_strategy = "left"
 num_epoch = 5
 
