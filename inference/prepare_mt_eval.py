@@ -14,6 +14,8 @@ def prepare(data_dict, lang, tokenizer, batch_size, max_length, shuffle=False):
         for i in range(len(examples['src'])):
             if lang == 'zh-en':
                 prompt = f"You are evaluating a Chinese-to-English Machine translation task. The source is '{examples['src'][i]}'. The model generated translation is '{examples['mt'][i]}'. Please identify all errors in the translation, up to a maximum of five. For each error, please give me the corresponding error location, error type and major/minor label for each error. Major errors can confuse or mislead the reader due to significant change in meaning, while minor errors don't lead to loss of meaning but will be noticed."
+            elif lang == 'en-de':
+                prompt = f"You are evaluating a English-to-German Machine translation task. The source is '{examples['src'][i]}'. The model generated translation is '{examples['mt'][i]}'. Please identify all errors in the translation, up to a maximum of five. For each error, please give me the corresponding error location, error type and major/minor label for each error. Major errors can confuse or mislead the reader due to significant change in meaning, while minor errors don't lead to loss of meaning but will be noticed."
             else:
                 raise NotImplementedError
             lst.append(prompt)
