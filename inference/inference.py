@@ -11,6 +11,7 @@ import pickle
 import argparse
 import os
 from pathlib import Path
+from typing import Dict, TypeVar, Iterable, List
 # import tensor_parallel as tp # do not seem to work
 
 # TODO: add generation config
@@ -21,7 +22,7 @@ def eval(model, tokenizer, task, dataloader, out_path, device='cuda:0', debug=Fa
     with torch.no_grad():
         for batch in tqdm(dataloader, mininterval=20):
             prompt, ref = batch
-            batch = tokenizer(prompt, return_tensors='pt', padding=False).to(device)
+            batch = tokenizer(prompt, return_tensors='pt', padding=True, truncation=True, max_length=1024).to(device)
             input_ids = batch['input_ids'].squeeze(1)
             attention_mask = batch['attention_mask'].squeeze(1)
             # change pad token to eos to supress warning
@@ -43,7 +44,7 @@ if __name__ == '__main__':
     argparser = argparse.ArgumentParser()
     argparser.add_argument("--model_base", type=str, help="llama or mistral")
     argparser.add_argument("--model_size", type=int, default=7, help="7, 13 or 70b for llama and 7b for mistral")
-    argparser.add_argument("--data_file", type=str, default="mt_test_data/zh-en_wmt_test_wmt22.tsv")
+    argparser.add_argument("--data_file", type=str, default="data/mt_test_data/zh-en_wmt_test_wmt22.tsv")
     argparser.add_argument("--out_path", type=str, default="out/zh-en_wmt_test_wmt22_out.pkl")
     argparser.add_argument("--precision", type=str, default="fp16", help="fp16 or fp32")
     argparser.add_argument("--language", type=str, default="zh-en", help="zh-en or en-de")
@@ -62,7 +63,7 @@ if __name__ == '__main__':
     else:
         dtype = torch.float32
 
-    device = 'cuda:0'
+    device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
     # print('loading data from', args.data_file)
     # print('saving to', out_path)
@@ -81,6 +82,8 @@ if __name__ == '__main__':
     else:
         raise NotImplementedError
     tokenizer = AutoTokenizer.from_pretrained(model)
+    tokenizer.pad_token = tokenizer.eos_token
+    tokenizer.padding_side = "left"
 
     # time model loading time, taking way too long
     t0 = time.time()
@@ -88,8 +91,10 @@ if __name__ == '__main__':
     model = AutoModelForCausalLM.from_pretrained(
         model,
         torch_dtype=dtype, # fp16 for training, fp32 for inference
-        device_map='auto'
-    )
+    ).to(device)
+    model.resize_token_embeddings(len(tokenizer))
+    model.eval()
+    
     t1 = time.time()
     print(f"Loading model takes {(t1 - t0) / 60} minutes")
 
