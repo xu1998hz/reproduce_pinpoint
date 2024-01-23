@@ -62,6 +62,10 @@ def store_corr_eval(evs, mt_scores_dict, mode, wmt, lang):
     elif mode == 'sys':
         print("sys_system_human: ", mqm_bp.Pearson()[0])
         print("sys_system: ", mqm_bp_no.Pearson()[0])
+        print("Pearson sys_system_human: ", mqm_bp.Pearson()[0])
+        print("Pearson sys_system: ", mqm_bp_no.Pearson()[0])
+        print("Spearman sys_system_human: ", mqm_bp.Spearman()[0])
+        print("Spearman sys_system: ", mqm_bp_no.Spearman()[0])
     else:
         print('Please choose between seg and sys!')
         exit(1)
@@ -69,9 +73,15 @@ def store_corr_eval(evs, mt_scores_dict, mode, wmt, lang):
 def main(args):
     evs = mt_data.EvalSet(args.wmt, args.lang)
     mt_outs_dict, refs, src = evs.sys_outputs, evs.all_refs[evs.std_ref], evs.src
+    print(args.load_file, args.seg)
     if not args.load_file:
-        print
-        for key in mt_outs_dict.keys():
+        lst = list(mt_outs_dict.keys())
+        if args.seg != -1:
+            # assume 5 segments, set lst to the ith segment
+            lst = lst[int(args.seg) * 4: (int(args.seg) + 1) * 4]
+            print(len(lst))
+            print(lst)
+        for key in lst:
             print(f'current running on mt system: {key}')
             # key = 'refA'
             data_dict = {'src': src, 'mt': mt_outs_dict[key]}
@@ -99,6 +109,7 @@ def main(args):
                 )
                 for i in range(len(outputs)):
                     input = tokenizer.decode(input_ids[i], skip_special_tokens=True)
+                    # print(input)
                     out = tokenizer.decode(outputs[i], skip_special_tokens=True)
                     out = out.replace(input, '')
                     # print(out)
@@ -109,6 +120,7 @@ def main(args):
                 json.dump(mt_scores_dict, f)
     else:
         mt_scores_dict = {}
+        zero, c = 0, 0
         print(mt_outs_dict.keys())
         for key in mt_outs_dict.keys():
             mt_scores_dict[key] = []
@@ -117,22 +129,27 @@ def main(args):
                 for line in score_dict[key]:
                     # print(line)
                     score = get_score(line)
+                    if score[2] == 0:
+                        zero += 1
+                    c += 1
                     # print(score)
                     # print('=' * 60)
                     mt_scores_dict[key].append(score[2])
+        print(f'{c} datapoints, {zero} of them have zero score: {zero/c} are zero scores')
 
-    store_corr_eval(evs, mt_scores_dict, 'seg', args.wmt, args.lang)
-    store_corr_eval(evs, mt_scores_dict, 'sys', args.wmt, args.lang)
+        store_corr_eval(evs, mt_scores_dict, 'seg', args.wmt, args.lang)
+        store_corr_eval(evs, mt_scores_dict, 'sys', args.wmt, args.lang)
 
 if __name__ == "__main__":
-    # TODO: add generation config
     argparse = argparse.ArgumentParser()
     argparse.add_argument('--wmt', default='wmt22')
-    argparse.add_argument('--lang', default='zh-en')
-    argparse.add_argument('--load_file', default=False)
+    argparse.add_argument('--lang', default='en-de')
+    argparse.add_argument('--load_file', action='store_true')
+    # TODO: tmp work around, --seg 0 - 4
+    argparse.add_argument('--seg', default=-1)
     # TODO: change this later, zh-en is trained on lab server 
-    argparse.add_argument('--model_addr', default='/home/guangleizhu/reproduce_pinpoint/finetune/ft_out/zh-en/checkpoint-760')
-    argparse.add_argument('--batch_size', default=2)
+    argparse.add_argument('--model_addr', default='/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/finetune/ft_out/en-de/checkpoint-770')
+    argparse.add_argument('--batch_size', default=1)
     argparse.add_argument('--max_length', default=720)
     args = argparse.parse_args()
     print(args)
