@@ -64,7 +64,7 @@ def feedback_generate(source, candidate, lang, model, tokenizer, config, device,
     score = get_score(out)
     return score[2], out
 
-def base_generate(src, lang, model, tokenizer, config, device, candidate=None, feedback=None, save=False, icl=True):
+def base_generate(src, lang, model, tokenizer, config, device, candidate=None, feedback=None, save=False, icl=True, f_type=None):
     messages = []
     if lang == 'en-de':
         src_lang, target_lang = 'English', 'German'
@@ -94,7 +94,20 @@ def base_generate(src, lang, model, tokenizer, config, device, candidate=None, f
         src_prompt = f"Translate the following {src_lang} source into {target_lang} translation. Give only one clean {target_lang} translation without any explanation. {src_lang} source: {i['src']} {target_lang} translation:"
         messages.append({"role": "user", "content": src_prompt})
         if i['feedback']:
-            feedback_prompt = f"{i['feedback']} Please revise the {target_lang} translation according to my feedback. Provide a clean {target_lang} translation without any explanation. {target_lang} translation:"
+            if f_type == "mqm":
+                feedback_prompt = f"{i['feedback']} Please revise the {target_lang} translation according to my feedback. Provide a clean {target_lang} translation without any explanation. {target_lang} translation:"
+            elif f_type == "binary":
+                feedback_prompt = f"Your translation contains errors. Please revise the {target_lang} translation according to my feedback. Provide a clean {target_lang} translation without any explanation. {target_lang} translation:"
+            elif f_type == "score":
+                score = i['feedback'].count('major')*(-5)+i['feedback'].count('minor')*(-1)
+                score = (score + 25)/25*100
+                feedback_prompt = f"Your translation score is {score} out of 100. Please revise the {target_lang} translation according to my feedback. Provide a clean {target_lang} translation without any explanation. {target_lang} translation:"
+            elif f_type == "improve":
+                feedback_prompt = f"Please improve the {target_lang} translation. Provide a clean {target_lang} translation without any explanation. {target_lang} translation:"
+            else:
+                print("We currently do not support other feedback!")
+                exit(1)
+
             messages.extend([
                 {"role": "assistant", "content": i['mt']},
                 {"role": "user", "content": feedback_prompt},
@@ -186,12 +199,17 @@ def correction(feedback, args):
         example = data['src'][i]
         mt = data['out'][i]
         f = feedback[i]
-        if f is None:
-            final_mt.append(mt)
-        else:
-            print('=' * 60)
-            new_candidate = base_generate(example, args.lang, base_model, base_tokenizer, None, device, mt, f)
+        # improve prompt will iterate all the samples
+        if args.feedback_type == 'improve':
+            new_candidate = base_generate(example, args.lang, base_model, base_tokenizer, None, device, mt, f, f_type=args.feedback_type)
             final_mt.append(new_candidate)
+        else:
+            if f is None:
+                final_mt.append(mt)
+            else:
+                print('=' * 60)
+                new_candidate = base_generate(example, args.lang, base_model, base_tokenizer, None, device, mt, f, f_type=args.feedback_type)
+                final_mt.append(new_candidate)
     data['out'] = final_mt
     with open(args.out_path, 'w') as f:
         json.dump(data, f)
