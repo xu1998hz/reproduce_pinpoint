@@ -1,11 +1,14 @@
 #!/bin/bash
-#SBATCH -N 1
-#SBATCH -p GPU-shared
-#SBATCH -t 8:00:00
-#SBATCH --cpus-per-task=5
-#SBATCH --gpus=v100-32:1
-#SBATCH --output=/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/slurm_out/mt_eval_test_seg_4.out
-#SBATCH --error=/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/slurm_out/mt_eval_test_seg_4_error.out
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=20
+#SBATCH --mem=64GB
+#SBATCH --gpus=1
+#SBATCH --time=24:00:00
+#SBATCH --account=guangleizhu
+#SBATCH --partition=taurus
+#SBATCH --output=/home/guangleizhu/reproduce_pinpoint/slurm_out/mt_eval_test.out
+#SBATCH --error=/home/guangleizhu/reproduce_pinpoint/slurm_out/mt_eval_test_error.out
 
 source ~/.bashrc
 # module purge
@@ -22,7 +25,7 @@ nvidia-smi
 # - username should be replaced by your username
 # - path-to-directory should be replaced by the path to your directory where the executable is
 
-cd /ocean/projects/cis230075p/gzhu/reproduce_pinpoint/inference
+cd /home/guangleizhu/reproduce_pinpoint/inference
 
 # deepspeed --include localhost:0,1,4,5,7 finetune_llama.py
-python3 test.py --seg 4
+python3 mt_metric.py
