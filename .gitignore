@@ -1,5 +1,5 @@
 # add out and save dir
-out/data
+# out/data
 save/
 slurm_out/
 finetune/wandb
