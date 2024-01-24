@@ -88,10 +88,10 @@ def base_generate(src, lang, model, tokenizer, config, device, candidate=None, f
     instances.append({'src': src, 'mt': candidate, 'feedback': feedback, 'revised': None})
 
     for i in instances:
-        src_prompt = f"Translate the following {src_lang} into {target_lang}. Give only one clean {target_lang} translation without any explanation. {src_lang}:\n{i['src']}\n{target_lang}:"
+        src_prompt = f"Translate the following {src_lang} source into {target_lang} translation. Give only one clean {target_lang} translation without any explanation. {src_lang} source:\n{i['src']}\n{target_lang} translation:"
         messages.append({"role": "user", "content": src_prompt})
         if i['feedback']:
-            feedback_prompt = f"{feedback} Please revise the translation according to feedback. Provide a clean {target_lang} translation without any explanation. {src_lang}:\n{src}\n{target_lang}:"
+            feedback_prompt = f"{feedback} Please revise the {target_lang} translation according to my feedback. Provide a clean {target_lang} translation without any explanation. {src_lang} source:\n{src}\n{target_lang} translation:"
             messages.extend([
                 {"role": "assistant", "content": candidate},
                 {"role": "user", "content": feedback_prompt},
@@ -123,27 +123,20 @@ def base_generate(src, lang, model, tokenizer, config, device, candidate=None, f
 
 
 # init settings
-def main(args):
+def feedback(args):
     assert args.lang in ['en-de', 'zh-en']
     weight_path = args.model_addr
     device = 'cuda:0'
 
     # load the feedback model
     feedback_tokenizer = AutoTokenizer.from_pretrained(weight_path, use_fast=True)
-    feedback_model = AutoModelForCausalLM.from_pretrained(weight_path, device_map=device, torch_dtype=torch.float16)
-
-    # load mistral 7b instruct model
-    if args.model == 'mistral':
-        base_name = 'mistralai/Mistral-7B-Instruct-v0.2'
-        base_tokenizer = AutoTokenizer.from_pretrained(base_name, use_fast=True)
-        base_model = AutoModelForCausalLM.from_pretrained(base_name, device_map=device, torch_dtype=torch.float16)
-    else:
-        raise NotImplementedError
+    feedback_model = AutoModelForCausalLM.from_pretrained(weight_path, device_map=device, torch_dtype=torch.float32)
 
     with open(args.data_path, 'r') as f:
         data = json.load(f)
-    final_mt = []
-    for i in tqdm(range(len(data['src']))):
+    f_lst = []
+    # for i in tqdm(range(len(data['src'])), desc='Getting feedback'):
+    for i in tqdm(range(30), desc='Getting feedback'):
     # for _ in tqdm(range(20)):
         # i = random.randint(0, len(data['src']) - 1)
         print('=' * 60)
@@ -154,14 +147,41 @@ def main(args):
         f = parse_feedback(f)
         if score == 0:
             print('no error detected, skip')
+            f_lst.append(None)
+        else:
+            f_lst.append(f)
+    return f_lst    
+
+def correction(feedback, args):
+    assert args.lang in ['en-de', 'zh-en']
+    device = 'cuda:0'
+
+    # load mistral 7b instruct model
+    if args.model == 'mistral':
+        base_name = 'mistralai/Mistral-7B-Instruct-v0.2'
+        base_tokenizer = AutoTokenizer.from_pretrained(base_name, use_fast=True)
+        base_model = AutoModelForCausalLM.from_pretrained(base_name, device_map=device, torch_dtype=torch.float32)
+    else:
+        raise NotImplementedError
+
+    with open(args.data_path, 'r') as f:
+        data = json.load(f)
+
+    final_mt = []
+    # for i in tqdm(range(len(data['src'])), desc='Running correction'):
+    for i in tqdm(range(30), desc='Running correction'):
+        example = data['src'][i]
+        mt = data['out'][i]
+        f = feedback[i]
+        if f is None:
             final_mt.append(mt)
-            continue
-        new_candidate = base_generate(example, args.lang, base_model, base_tokenizer, None, device, mt, f)
-        final_mt.append(new_candidate)
+        else:
+            new_candidate = base_generate(example, args.lang, base_model, base_tokenizer, None, device, mt, f)
+            final_mt.append(new_candidate)
     data['out'] = final_mt
     with open(args.out_path, 'w') as f:
         json.dump(data, f)
-
+    
 
 if __name__ == "__main__":
     argparse = argparse.ArgumentParser()
@@ -176,4 +196,5 @@ if __name__ == "__main__":
     argparse.add_argument('--max_length', default=720)
     args = argparse.parse_args()
     print(args)
-    main(args)
+    f = feedback(args)
+    correction(f, args)
