@@ -27,13 +27,13 @@ def eval(model, tokenizer, task, dataloader, out_path, device='cuda:0', debug=Fa
             attention_mask = batch['attention_mask'].squeeze(1)
             # change pad token to eos to supress warning
             outputs = model.generate(input_ids, attention_mask=attention_mask, max_new_tokens=1024, pad_token_id=tokenizer.eos_token_id)
-            out = tokenizer.decode(outputs[0], skip_special_tokens=True)
+            out = tokenizer.batch_decode(outputs, skip_special_tokens=True)
             if task == 'mt':
-                out_data.append({'src': prompt[0], 'ref': ref[0], 'mt': out})
+                out_data += [{'src': prompt_ele, 'ref': ref_ele, 'mt': out_ele} for prompt_ele, ref_ele, out_ele in zip(prompt, ref, out)]
             elif task == 'qa':
-                out_data.append({'q': prompt[0], 'ref': ref[0], 'a': out})
+                out_data += [{'q': prompt_ele, 'ref': ref_ele, 'a': out_ele} for prompt_ele, ref_ele, out_ele in zip(prompt, ref, out)] 
             elif task == 'summ':
-                out_data.append({'src': prompt[0], 'ref': ref[0], 'sum': out})
+                out_data += [{'src': prompt_ele, 'ref': ref_ele, 'sum': out_ele} for prompt_ele, ref_ele, out_ele in zip(prompt, ref, out)]
             else:
                 raise NotImplementedError
 
