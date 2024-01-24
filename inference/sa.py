@@ -8,6 +8,7 @@ import math
 from prepare_mt_eval import prepare
 import argparse
 from tqdm import tqdm
+import json
 
 
 # !! How to run !!
@@ -22,6 +23,12 @@ from tqdm import tqdm
 # TODO:
 # 1. add config for the model
 # 2. load data in batch
+
+def parse_feedback(text):
+    return text
+    # l = text.split('\n')
+    # for line in l:
+
 
 def feedback_generate(source, candidate, model, tokenizer, config, device, save=False):
     # TODO: add other languages
@@ -47,7 +54,6 @@ def feedback_generate(source, candidate, model, tokenizer, config, device, save=
     return score[2], out
 
 def base_generate(src, model, tokenizer, config, device, candidate=None, feedback=None, save=False, icl=True):
-    # TODO: add examples
     messages = []
     if icl and feedback:
         instances = [{'src': '如果逾期，逾期记录将记录到个人信用报告中，可能会对日后买车、购房等经济生活造成不良影响。',
@@ -86,11 +92,11 @@ def base_generate(src, model, tokenizer, config, device, candidate=None, feedbac
     out = tokenizer.decode(outputs[0], skip_special_tokens=True)
     input = tokenizer.decode(input_ids[0], skip_special_tokens=True)
     out = out.replace(input, '')
+    out = out[1:]
     if feedback:
         print(src, '|', candidate, '|', feedback)
         print('after correction'.center(60, '-'))
         print(out)
-    # score = get_score(out)
     return out
 
 
@@ -109,46 +115,38 @@ def main(args):
         base_tokenizer = AutoTokenizer.from_pretrained(base_name, use_fast=True)
         base_model = AutoModelForCausalLM.from_pretrained(base_name, device_map=device, torch_dtype=torch.float16)
     else:
-        # TODO: also add option for llama-2-7b-chat
         raise NotImplementedError
 
-    evs = mt_data.EvalSet(args.wmt, args.lang)
-    src = evs.src
-    # select an index for now
-    for _ in tqdm(range(10)):
-        i = random.randint(0, len(src))
+    with open(args.data_path, 'r') as f:
+        data = json.load(f)
+    final_mt = []
+    # for i in tqdm(range(len(data['src']))):
+    for _ in tqdm(range(5)):
+        i = random.randint(0, len(data['src']) - 1)
         print('=' * 60)
-        print(f'current index is: {i}')
-        example = src[i]
+        example = data['src'][i]
+        mt = data['out'][i]
         # generate initial candidate
-        mt = base_generate(example, base_model, base_tokenizer, None, device, None, None)
         score, f = feedback_generate(example, mt, feedback_model, feedback_tokenizer, None, device)
+        f = parse_feedback(f)
         if score == 0:
-            print('no error in the inital candidate, skip this example')
+            print('no error detected, skip')
+            final_mt.append(mt)
             continue
-        # set initial parameters TODO: need to tune this 
-        temp = 0.9
-        n = 2
-        decay = 0.1
-
-        for i in range(n):
-            new_candidate = base_generate(example, base_model, base_tokenizer, None, device, mt, f)
-            new_score, f = feedback_generate(example, new_candidate, feedback_model, feedback_tokenizer, None, device, False)
-            print(f)
-            print('-' * 60)
-            p = min(1, math.exp((new_score - score) / (n * temp)))
-            if random.random() < p:
-                mt = new_candidate
-            temp = max(0, temp - temp * decay)
-        print(f'final output is: {mt}')
+        new_candidate = base_generate(example, base_model, base_tokenizer, None, device, mt, f)
+        final_mt.append(new_candidate)
+    print(final_mt)
 
 
 if __name__ == "__main__":
     argparse = argparse.ArgumentParser()
     argparse.add_argument('--wmt', default='wmt22')
-    argparse.add_argument('--lang', default='zh-en')
+    argparse.add_argument('--lang', default='en-de')
     argparse.add_argument('--model', default='mistral')
-    argparse.add_argument('--model_addr', default='/home/guangleizhu/reproduce_pinpoint/finetune/ft_out/zh-en/checkpoint-760')
+    argparse.add_argument('--model_addr', default='/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/finetune/ft_out/en-de/checkpoint-770')
+    argparse.add_argument('--data_path', default='/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/out/comet_scores_en-de_wmt_test_wmt22_mistral.json')
+    argparse.add_argument('--out_path', default='/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/out/test.json')
+    # FIXME: batch not working rn
     argparse.add_argument('--batch_size', default=1)
     argparse.add_argument('--max_length', default=720)
     args = argparse.parse_args()
