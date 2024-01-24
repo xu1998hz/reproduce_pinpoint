@@ -117,7 +117,7 @@ def base_generate(src, lang, model, tokenizer, config, device, candidate=None, f
             messages.append({"role": "assistant", "content": i['revised']})
     prompt = tokenizer.apply_chat_template(messages, tokenize=False)
     batch = tokenizer(prompt, return_tensors='pt', padding=False).to(device)
-    print(prompt)
+    # print(prompt)
     input_ids = batch['input_ids']
     attention_mask = batch['attention_mask']
     model.eval()
@@ -132,10 +132,10 @@ def base_generate(src, lang, model, tokenizer, config, device, candidate=None, f
     input = tokenizer.decode(input_ids[0], skip_special_tokens=True)
     out = out.replace(input, '').strip()
 
-    if feedback:
-        print(src, '|', candidate, '|', feedback)
-        print('after correction'.center(60, '-'))
-        print(out)
+    # if feedback:
+    #     print(src, '|', candidate, '|', feedback)
+    #     print('after correction'.center(60, '-'))
+    #     print(out)
     return out
 
 
@@ -207,7 +207,7 @@ def correction(feedback, args):
             if f is None:
                 final_mt.append(mt)
             else:
-                print('=' * 60)
+                # print('=' * 60)
                 new_candidate = base_generate(example, args.lang, base_model, base_tokenizer, None, device, mt, f, f_type=args.feedback_type)
                 final_mt.append(new_candidate)
     data['out'] = final_mt
