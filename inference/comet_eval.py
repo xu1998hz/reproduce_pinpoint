@@ -1,6 +1,5 @@
 import argparse 
 from comet import download_model, load_from_checkpoint
-import pandas as pd
 import pickle
 # remember to switch to 'comet' environment
 

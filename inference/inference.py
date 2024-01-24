@@ -24,6 +24,7 @@ def eval(model, tokenizer, task, dataloader, out_path, device='cuda:0', debug=Fa
             prompt, ref = batch
             batch = tokenizer(prompt, return_tensors='pt', padding=True, truncation=True, max_length=1024).to(device)
             input_ids = batch['input_ids'].squeeze(1)
+            print(input_ids.size())
             attention_mask = batch['attention_mask'].squeeze(1)
             # change pad token to eos to supress warning
             outputs = model.generate(input_ids, attention_mask=attention_mask, max_new_tokens=1024, pad_token_id=tokenizer.eos_token_id)

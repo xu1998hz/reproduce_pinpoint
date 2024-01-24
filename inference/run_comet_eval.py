@@ -20,9 +20,9 @@ final_ls = []
 src_ls, out_ls = [], []
 for ele in data:
     if args.lang_dir == 'zh-en':
-        src = ele['src'].split('Chinese:\n')[1].split('\n')[0].strip()
+        src = ele['src'].split('Chinese:\n')[-1].split('\n')[0].strip()
     elif args.lang_dir == 'en-de':
-        src = ele['src'].split('English:\n')[1].split('\n')[0].strip()
+        src = ele['src'].split('English:\n')[-1].split('\n')[0].strip()
     else:
         print("lang dir is not supported!")
         exit(1)
