@@ -135,21 +135,21 @@ def feedback(args):
     with open(args.data_path, 'r') as f:
         data = json.load(f)
     f_lst = []
-    # for i in tqdm(range(len(data['src'])), desc='Getting feedback'):
-    for i in tqdm(range(30), desc='Getting feedback'):
-    # for _ in tqdm(range(20)):
+    c = 0
+    for i in tqdm(range(len(data['src'])), desc='Getting feedback'):
+    # for i in tqdm(range(10), desc='Getting feedback'):
         # i = random.randint(0, len(data['src']) - 1)
-        print('=' * 60)
         example = data['src'][i]
         mt = data['out'][i]
         # generate initial candidate
         score, f = feedback_generate(example, mt, args.lang, feedback_model, feedback_tokenizer, None, device)
         f = parse_feedback(f)
         if score == 0:
-            print('no error detected, skip')
+            c += 1
             f_lst.append(None)
         else:
             f_lst.append(f)
+    print(f'number of no feedback: {c} ({c / len(data["src"])})')
     return f_lst    
 
 def correction(feedback, args):
@@ -168,14 +168,15 @@ def correction(feedback, args):
         data = json.load(f)
 
     final_mt = []
-    # for i in tqdm(range(len(data['src'])), desc='Running correction'):
-    for i in tqdm(range(30), desc='Running correction'):
+    for i in tqdm(range(len(data['src'])), desc='Running correction'):
+    # for i in tqdm(range(10), desc='Running correction'):
         example = data['src'][i]
         mt = data['out'][i]
         f = feedback[i]
         if f is None:
             final_mt.append(mt)
         else:
+            print('=' * 60)
             new_candidate = base_generate(example, args.lang, base_model, base_tokenizer, None, device, mt, f)
             final_mt.append(new_candidate)
     data['out'] = final_mt
