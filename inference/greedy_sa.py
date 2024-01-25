@@ -10,7 +10,7 @@ import argparse
 from tqdm import tqdm
 import json
 import re
-
+from manifest import Manifest
 
 # !! How to run !!
 # "python sa.py > out.txt"
@@ -116,21 +116,24 @@ def base_generate(src, lang, model, tokenizer, config, device, candidate=None, f
         if i['revised']:
             messages.append({"role": "assistant", "content": i['revised']})
     prompt = tokenizer.apply_chat_template(messages, tokenize=False)
-    batch = tokenizer(prompt, return_tensors='pt', padding=False).to(device)
-    # print(prompt)
-    input_ids = batch['input_ids']
-    attention_mask = batch['attention_mask']
-    model.eval()
-    outputs = model.generate(
-        input_ids, 
-        attention_mask=attention_mask, 
-        max_new_tokens=512, 
-        pad_token_id=tokenizer.eos_token_id,
-        temperature=0
-    )
-    out = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    input = tokenizer.decode(input_ids[0], skip_special_tokens=True)
-    out = out.replace(input, '').strip()
+    if args.model == "moe":
+        out = model.run(prompt, n=1, max_new_tokens=512, do_sample=False)
+    else:
+        batch = tokenizer(prompt, return_tensors='pt', padding=False).to(device)
+        # print(prompt)
+        input_ids = batch['input_ids']
+        attention_mask = batch['attention_mask']
+        model.eval()
+        outputs = model.generate(
+            input_ids, 
+            attention_mask=attention_mask, 
+            max_new_tokens=512, 
+            pad_token_id=tokenizer.eos_token_id,
+            temperature=0
+        )
+        out = tokenizer.decode(outputs[0], skip_special_tokens=True)
+        input = tokenizer.decode(input_ids[0], skip_special_tokens=True)
+        out = out.replace(input, '').strip()
 
     # if feedback:
     #     print(src, '|', candidate, '|', feedback)
@@ -180,15 +183,24 @@ def correction(feedback, args):
     assert args.lang in ['en-de', 'zh-en']
     device = 'cuda:0'
 
-    # load mistral 7b instruct model
-    if args.model == 'mistral':
-        base_name = 'mistralai/Mistral-7B-Instruct-v0.2'
+    if args.model == "moe":
+        client_connection = "http://128.111.28.82:5000"
+        base_tokenizer = None
+        base_model = Manifest(
+            client_name = "huggingface",
+            client_connection = client_connection,
+        )
+        base_tokenizer = AutoTokenizer.from_pretrained('mistralai/Mistral-7B-Instruct-v0.2', use_fast=True)
     else:
-        base_name = 'NousResearch/Llama-2-7b-chat-hf'
-    print(f"loading {base_name}")
+        # load mistral 7b instruct model
+        if args.model == 'llama2':
+            base_name = 'NousResearch/Llama-2-7b-chat-hf'
+        else:
+            base_name = 'mistralai/Mistral-7B-Instruct-v0.2'
+        print(f"loading {base_name}")
 
-    base_tokenizer = AutoTokenizer.from_pretrained(base_name, use_fast=True)
-    base_model = AutoModelForCausalLM.from_pretrained(base_name, torch_dtype=torch.float32).to(device)
+        base_tokenizer = AutoTokenizer.from_pretrained(base_name, use_fast=True)
+        base_model = AutoModelForCausalLM.from_pretrained(base_name, torch_dtype=torch.float32).to(device)
 
     with open(args.data_path, 'r') as f:
         data = json.load(f)
@@ -219,7 +231,7 @@ if __name__ == "__main__":
     argparse = argparse.ArgumentParser()
     argparse.add_argument('--wmt', default='wmt22')
     argparse.add_argument('--lang', default='zh-en')
-    argparse.add_argument('--model', default='mistral')
+    argparse.add_argument('--model', default='mistral, llama2 or moe')
     argparse.add_argument('--model_addr', default='/mnt/taurus/home/guangleizhu/reproduce_pinpoint/finetune/ft_out/zh-en/checkpoint-760/')
     argparse.add_argument('--data_path', default='out/mt_out/comet_scores_zh-en_wmt_test_wmt22_mistral.json')
     argparse.add_argument('--out_path', default='out/mt_out/correction_zh-en_wmt_test_wmt22_mistral.json')
