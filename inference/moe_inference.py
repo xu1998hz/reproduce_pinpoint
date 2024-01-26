@@ -19,7 +19,7 @@ def main(args):
 
     model_name = "mistralai/Mixtral-8x7B-Instruct-v0.1"
     tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
-    client_connection = "http://128.111.28.80:5002"  # or the public url of the server
+    client_connection = "http://128.111.28.82:5000"  # or the public url of the server
 
     model = Manifest(
         client_name = "huggingface",
@@ -34,8 +34,18 @@ def main(args):
 
     if args.lang == 'en-de':
         src_lang, target_lang = 'English', 'German'
+        icl = True
+        icl_examples = [
+            {'src': 'We can stand on the Earth and look up at the night sky and see stars with our bare eyes.', 
+            'mt': 'Wir können auf der Erde stehen und in den Nachthimmel schauen und die Sterne mit unseren bloßen Augen sehen.'},
+            {'src': "O'Brien told the woman to leave the park and stop harassing her, at which point the woman unleashed a can of mace at the couple.",
+            'mt': "O'Brien sagte der Frau, sie solle den Park verlassen und aufhören, sie zu belästigen, woraufhin die Frau eine Dose Keule auf das Paar losließ."}
+        ]
     elif args.lang == 'zh-en':
         src_lang, target_lang = 'Chinese', 'English'
+        icl = False
+        icl_examples = []
+        
 
     mt_out = []
     print(len(data['src']))
@@ -44,11 +54,17 @@ def main(args):
         src = data['src'][i: i + args.batch_size]
         prompts = []
         for s in src:
-            print(s)
             messages = []
+            if icl:
+                for example in icl_examples:
+                    messages.append({"role": "user", "content": f"Translate the following {src_lang} source into {target_lang} translation. Give only one clean {target_lang} translation without any explanation. {src_lang} source: {example['src']} {target_lang} translation:"})
+                    messages.append({"role": "assistant", "content": example['mt']})
+
             src_prompt = f"Translate the following {src_lang} source into {target_lang} translation. Give only one clean {target_lang} translation without any explanation. {src_lang} source: {s} {target_lang} translation:"
             messages.append({"role": "user", "content": src_prompt})
             prompt = tokenizer.apply_chat_template(messages, tokenize=False)
+            # print(prompt)
+            # print('-' * 60)
             prompts.append(prompt)
         # print(src)
         out = model.run(prompts, max_new_tokens=512, do_sample=False)
@@ -64,11 +80,11 @@ def main(args):
 if __name__ == "__main__":
     argparse = argparse.ArgumentParser()
     argparse.add_argument('--wmt', default='wmt22')
-    argparse.add_argument('--lang', default='zh-en')
-    argparse.add_argument('--data_path', default='/home/guangleizhu/reproduce_pinpoint/out/mt_out/comet_scores_zh-en_wmt_test_wmt22_llama2.json')
+    argparse.add_argument('--lang', default='en-de')
+    argparse.add_argument('--data_path', default='/home/guangleizhu/reproduce_pinpoint/out/mt_out/comet_scores_en-de_wmt_test_wmt22_llama2.json')
     argparse.add_argument('--out_path', default='test.json')
     # FIXME: batch not working rn
-    argparse.add_argument('--batch_size', default=8)
+    argparse.add_argument('--batch_size', default=2)
     argparse.add_argument('--max_length', default=720)
     args = argparse.parse_args()
     print(args)
