@@ -28,6 +28,7 @@ import json
 
 def parse_text(text):
     # Split the text into subtexts using '\n'
+    text = text.split('\n\n')[0].split(' (')[0].strip()
     subtexts = text.split('\n')
 
     # Keywords to search for
@@ -48,8 +49,10 @@ def parse_text(text):
     else:
         return '\n'.join(l)
 
-f = '/home/guangleizhu/reproduce_pinpoint/out/mixtral_translation_zh-en_wmt22.json'
-out_f = '/home/guangleizhu/reproduce_pinpoint/out/mixtral_cleaned_translation_zh-en_wmt22.json'
+lang="en-de"
+wmt="wmt22"
+f = f'out/mt_out/moe_{lang}_wmt_test_{wmt}.json'
+out_f = f.replace('.json', '_cleared.json')
 
 with open(f, 'r') as f:
     data = json.load(f)
