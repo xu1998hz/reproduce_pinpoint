@@ -14,6 +14,7 @@ from dataclasses import dataclass
 import click
 import argparse
 import os
+import deepspeed
 
 """deepspeed --num_gpus 8 code/finetune_llama.py"""
 
@@ -30,20 +31,16 @@ max_length = 720
 padding_strategy = "left"
 num_epoch = 5
 
-argparse = argparse.ArgumentParser()
-argparse.add_argument("--lang", type=str, help="en-de or zh-en")
-args = argparse.parse_args()
+parser = argparse.ArgumentParser()
+parser.add_argument("--lang", type=str, help="en-de or zh-en")
+parser.add_argument("--deepspeed", type=str, default='--', help="")
+parser.add_argument('--local_rank', type=int, default=-1, help='local rank passed from distributed launcher')
+args = parser.parse_args()
 
 run_name = args.lang
 assert run_name in ['en-de', 'zh-en']
-# f = "/home/guangleizhu/reproduce_pinpoint/data/mqm_newstest2021_ende_parsed.json"
 f = f"../data/mqm_newstest2021_{run_name}_parsed.json"
-# check if file path f exists
-if not os.path.exists(f):
-    raise ValueError(f"File {f} does not exist!")
-# output_dir = "/home/guangleizhu/reproduce_pinpoint/finetune/ft_out"
 output_dir = f"ft_out/{run_name}" 
-
 
 class SupervisedDataset(Dataset):
     """Dataset for supervised fine-tuning."""

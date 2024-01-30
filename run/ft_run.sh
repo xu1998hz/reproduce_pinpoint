@@ -16,3 +16,4 @@ nvidia-smi
 cd ../finetune
 
 deepspeed --num_gpus 4 finetune_llama.py --lang zh-en
+deepspeed --num_gpus 4 finetune_llama.py --lang en-de
