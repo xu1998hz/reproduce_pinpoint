@@ -4,6 +4,10 @@ This is repo to reproduce Pinpoint, Not Criticize: Refining Large Language Model
 ASQA contains two references, denoted as ref1 and ref2.
 
 Summ contains multiple references, denoted as refs, each can be separated by "******"
+<p align="center">
+  <img src="data/main.png" width="400" class="center">
+</p>
+
 ## Set up
 We provide conda environments for FITO and comet (for machine translation eval).
 ```
