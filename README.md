@@ -1,27 +1,33 @@
-# reproduce_pinpoint
-This is repo to reproduce Pinpoint, Not Criticize: Refining Large Language Models via Fine-Grained Actionable Feedback (https://arxiv.org/abs/2311.09336).
+# Pinpoint, Not Criticize
+This repository is dedicated to reproducing "Pinpoint, Not Criticize: Refining Large Language Models via Fine-Grained Actionable Feedback" ([Arxiv Link](https://arxiv.org/pdf/2311.09336.pdf)) with open-source LLMs.
 
-ASQA contains two references, denoted as ref1 and ref2.
-
-Summ contains multiple references, denoted as refs, each can be separated by "******"
 <p align="center">
   <img src="data/main.png" width="400" class="center">
 </p>
 
-## Set up
-We provide conda environments for FITO and comet (for machine translation eval).
+## Getting Started
+You can set up environments for FITO and COMET (used for MT evaluation) using Conda as follows:
 ```
+git clone https://github.com/xu1998hz/reproduce_pinpoint.git
+cd reproduce_pinpoint
 conda env create -f environment.yml
 conda env create -f comet.yml
 ```
-## Usage
+## How to Use
 ### Baseline LLM Performance
-To test the baseline open-source LLM (currently Llama 2 and Mistral supported) capability on machine translation, long-form QA and summerization. simply run the following bash file. We also provide given results under `out`.
+To evaluate the performance of baseline LLMs (currently supporting Llama 2 and Mistral) in Machine Translation, ASQA and summarization tasks, run the following bash scripts. The results are also available in the `out` directory.
 ```
 cd run
 ./mt_run.sh
 ./qa_run.sh
 ./summ_run.sh
 ```
-### Finetune Llama
+### Feedback Model
+To fine-tune the Llama-7b model with fine-grained text feedback, run the following script. The checkpoint will be available for download soon.
+```
+cd run
+./ft_run.sh
+```
+### Inference
+
 
