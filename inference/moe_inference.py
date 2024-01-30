@@ -82,9 +82,9 @@ if __name__ == "__main__":
     argparse.add_argument('--wmt', default='wmt22')
     argparse.add_argument('--lang', default='en-de')
     argparse.add_argument('--data_path', default='/home/guangleizhu/reproduce_pinpoint/out/mt_out/comet_scores_en-de_wmt_test_wmt22_llama2.json')
-    argparse.add_argument('--out_path', default='test.json')
+    argparse.add_argument('--out_path', default='icl_en-de_wmt22_moe.json')
     # FIXME: batch not working rn
-    argparse.add_argument('--batch_size', default=2)
+    argparse.add_argument('--batch_size', default=8)
     argparse.add_argument('--max_length', default=720)
     args = argparse.parse_args()
     print(args)
