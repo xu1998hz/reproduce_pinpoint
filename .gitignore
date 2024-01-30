@@ -6,5 +6,6 @@ finetune/wandb
 finetune/ft_out
 qlora/wandb
 qlora/output
+out/tmp
 # pycache
 __pycache__/

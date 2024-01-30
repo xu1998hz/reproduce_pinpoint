@@ -76,7 +76,7 @@ if __name__ == '__main__':
     print(dataset.data)
     dataloader = DataLoader(dataset, args.batch_size, shuffle=False)
 
-    if args.model_base == 'llama':
+    if args.model_base == 'llama2':
         model = f"meta-llama/Llama-2-{args.model_size}b-chat-hf"
     elif args.model_base == 'mistral':
         model = f"mistralai/Mistral-7B-Instruct-v0.2"

@@ -78,7 +78,7 @@ if __name__ == '__main__':
             src = i['src'][a: -b]
             ref = i['ref']
             mt = i['mt']
-            if args.model_base == 'llama':
+            if args.model_base == 'llama2':
                 mt = mt[len(i['src']) - 14:] # 14 = len(<s></s>) * 2
             else:
                 mt = mt[len(i['src']) - 2:] 

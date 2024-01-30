@@ -62,7 +62,7 @@ python3 inference/postprocess.py --data_file "$out_data_path" --out_path "$out_c
 echo "Saved cleaned output to $out_clean_path"
 
 if [ "$task" = "mt" ]; then
-    comet_out="$out_dir/comet_${fname}.txt"
+    comet_out="$out_dir/comet_scores_${fname}_${model_base}.json"
     conda activate comet
     echo "Running COMET eval for ${task}!"
     python3 inference/comet_eval.py --data "$out_clean_path" --out_path "$comet_out" --model "$comet_model" 
