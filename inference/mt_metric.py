@@ -116,7 +116,7 @@ def main(args):
                     # print('=' * 60)
                     mt_scores_dict[key].append(out)
                 # print(i)
-            with open(f'../out/{args.lang}_{args.wmt}_{key}_raw.json', 'w') as f:
+            with open(f'../out/mt_metric_eval/{args.lang}_{args.wmt}_{key}_raw.json', 'w') as f:
                 json.dump(mt_scores_dict, f)
     else:
         mt_scores_dict = {}

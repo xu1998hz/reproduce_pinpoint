@@ -113,5 +113,7 @@ file_path = f'/home/guangleizhu/reproduce_pinpoint/data/mqm_newstest2021_{mode}.
 json_output = read_tsv_and_convert_to_json(file_path, mode)
 
 # Optionally, write the JSON data to a file
+# 'zhen' -> 'zh-en'
+mode = mode[:2] + '-' + mode[2:]
 with open(f'/home/guangleizhu/reproduce_pinpoint/data/mqm_newstest2021_{mode}_parsed.json', 'w', encoding='utf-8') as json_file:
     json.dump(json_output, json_file, ensure_ascii=False, indent=4)

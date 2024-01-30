@@ -40,6 +40,7 @@ print(f'comet score: {model_output.system_score}') # system-level score
 data_dict = {'src': [], 'out': [], 'seg': []}
 with open(args.out_path, 'w') as f:
     data_dict['sys'] = model_output.system_score
+    # print system-level score
     for i in range(len(data)):
         data_dict['seg'].append(model_output.scores[i])
         data_dict['src'].append(data[i]['src'])

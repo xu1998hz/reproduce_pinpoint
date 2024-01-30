@@ -13,6 +13,7 @@ from torch.utils.data import Dataset
 from dataclasses import dataclass
 import click
 import argparse
+import os
 
 """deepspeed --num_gpus 8 code/finetune_llama.py"""
 
@@ -26,18 +27,22 @@ DEFAULT_EOS_TOKEN = "</s>"
 DEFAULT_BOS_TOKEN = "</s>"
 DEFAULT_UNK_TOKEN = "</s>"
 max_length = 720
-# f = "data/eval_mt_russian_llama.json"
-# f = "/home/guangleizhu/reproduce_pinpoint/data/mqm_newstest2021_ende_parsed.json"
-f = "/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/data/mqm_newstest2021_ende_parsed.json"
-# output_dir = "/home/guangleizhu/reproduce_pinpoint/finetune/ft_out"
-# load run_name from args
-# run_name = 'zh-en'
-run_name = 'en-de'
-
-# output_dir = f"/ocean/projects/cis230075p/gzhu/reproduce_pinpoint/finetune/ft_out/{run_name}" 
-output_dir = f"/home/guangleizhu/reproduce_pinpoint/finetune/ft_out/{run_name}" 
 padding_strategy = "left"
 num_epoch = 5
+
+argparse = argparse.ArgumentParser()
+argparse.add_argument("--lang", type=str, help="en-de or zh-en")
+args = argparse.parse_args()
+
+run_name = args.lang
+assert run_name in ['en-de', 'zh-en']
+# f = "/home/guangleizhu/reproduce_pinpoint/data/mqm_newstest2021_ende_parsed.json"
+f = f"../data/mqm_newstest2021_{run_name}_parsed.json"
+# check if file path f exists
+if not os.path.exists(f):
+    raise ValueError(f"File {f} does not exist!")
+# output_dir = "/home/guangleizhu/reproduce_pinpoint/finetune/ft_out"
+output_dir = f"ft_out/{run_name}" 
 
 
 class SupervisedDataset(Dataset):

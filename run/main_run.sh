@@ -5,7 +5,7 @@ source ~/.bashrc
 eval "$(conda shell.bash hook)"
 conda activate torch2.1
 
-nvidia-smi
+# nvidia-smi
 
 # move to working directory
 # this job assumes:
@@ -15,7 +15,8 @@ nvidia-smi
 # - username should be replaced by your username
 # - path-to-directory should be replaced by the path to your directory where the executable is
 
-cd /ocean/projects/cis230075p/gzhu/reproduce_pinpoint
+cd ..
+pwd
 
 while getopts i:b:m:p:o:t:d:s: flag
 do
@@ -47,6 +48,7 @@ echo "Precision: $precision"
 echo "Output Directory: $out_dir"
 echo "Comet Model: $comet_model"
 echo "Debug Mode: $debug"
+
 
 # echo commands to stdout
 # set -x
