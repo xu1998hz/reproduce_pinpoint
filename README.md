@@ -30,4 +30,31 @@ cd run
 ```
 ### Inference
 
+### Citation
 
+```
+@inproceedings{xu-etal-2024-llmrefine,
+    title = "{LLMR}efine: Pinpointing and Refining Large Language Models via Fine-Grained Actionable Feedback",
+    author = "Xu, Wenda  and
+      Deutsch, Daniel  and
+      Finkelstein, Mara  and
+      Juraska, Juraj  and
+      Zhang, Biao  and
+      Liu, Zhongtao  and
+      Wang, William Yang  and
+      Li, Lei  and
+      Freitag, Markus",
+    editor = "Duh, Kevin  and
+      Gomez, Helena  and
+      Bethard, Steven",
+    booktitle = "Findings of the Association for Computational Linguistics: NAACL 2024",
+    month = jun,
+    year = "2024",
+    address = "Mexico City, Mexico",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.findings-naacl.92/",
+    doi = "10.18653/v1/2024.findings-naacl.92",
+    pages = "1429--1445",
+    abstract = "Recent large language models (LLM) areleveraging human feedback to improve theirgeneration quality. However, human feedbackis costly to obtain, especially during inference.In this work, we propose LLMRefine, aninference time optimization method to refineLLM`s output. The core idea is to usea learned fine-grained feedback model topinpoint defects and guide LLM to refinethem iteratively. Using original LLM as aproposal of edits, LLMRefine searches fordefect-less text via simulated annealing, tradingoff the exploration and exploitation. Weconduct experiments on three text generationtasks, including machine translation, long-form question answering (QA), and topicalsummarization. LLMRefine consistentlyoutperforms all baseline approaches, achievingimprovements up to 1.7 MetricX points ontranslation tasks, 8.1 ROUGE-L on ASQA, 2.2ROUGE-L on topical summarization."
+}
+```
